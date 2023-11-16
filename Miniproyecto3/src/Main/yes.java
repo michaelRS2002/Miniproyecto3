@@ -8,13 +8,13 @@ package Main;
  *
  * @author invitado
  */
-public class PruebaAdrianchows {
+public class yes {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Mi mama me mima");
+        System.out.println("Mi mama no me mima");
     }
     
 }
