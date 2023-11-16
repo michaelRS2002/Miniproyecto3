@@ -13,6 +13,7 @@ public class GUIMiniProyecto3 extends JFrame {
     JLabel lNom;
     JTextField jtPresen;
     JPanel pGeneral;
+    JMenuItem inicio;
     
     public GUIMiniProyecto3()
     {
@@ -21,11 +22,14 @@ public class GUIMiniProyecto3 extends JFrame {
         crearGUI1();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+        setLocationRelativeTo(null);
     }
     
     public void crearGUI1()
     {
+        //Panel Menu
+        inicio= new JMenuItem("Inicio");
+        
         lNom = new JLabel("<html>Bienvenido a Examenes Conectados<br>"
                           +"tu plataforma para hacer examenes <br>"
                           +"en grupos!!");
