@@ -5,17 +5,20 @@ package Vista;
  * @author invitado
  */
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUIMiniProyecto3 extends JFrame {
    
-    JLabel lNom, lImagenMenu;
+    JLabel lNom, lImagenMenu, lCrearExamen;
     JTextField jtPresen;
-    JPanel pGeneral, pMenu;
+    JPanel pGeneral, pMenu, pGeneral2;
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
+   
     
     public GUIMiniProyecto3()
     {
@@ -32,6 +35,7 @@ public class GUIMiniProyecto3 extends JFrame {
         //Panel Menu
         barra = new JMenuBar();
         inicio = new JMenuItem("Inicio");
+        inicio.setEnabled(false);
         inicio.setHorizontalAlignment(JMenuItem.CENTER);
         crearExamen = new JMenuItem("Crear Examen");
         crearExamen.setHorizontalAlignment(JMenuItem.CENTER);
@@ -76,6 +80,50 @@ public class GUIMiniProyecto3 extends JFrame {
         //add(barra, BorderLayout.NORTH);
         
         
+    
+    ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
+    inicio.addActionListener(ev);
+    crearExamen.addActionListener(ev);
+    
+    }
+    
+    public void crearGUI2()
+    {
+        
+        pGeneral2 = new JPanel(new BorderLayout());
+        lCrearExamen = new JLabel("Crear examenes");
+        Font forte = new Font("Comic Sans", Font.ROMAN_BASELINE, 20);
+        lCrearExamen.setFont(forte);
+        lCrearExamen.setHorizontalAlignment(JLabel.CENTER);
+
+        
+        pGeneral2.add(lCrearExamen, BorderLayout.NORTH);
+        add(pGeneral2);
+        revalidate();
+        inicio.setEnabled(true);
+    
+    }
+    class ClaseManejadoraEventos implements ActionListener
+    {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {      
+
+                if (e.getSource() == inicio)
+                {            
+                    pGeneral2.setVisible(false);
+                    pGeneral.setVisible(true);
+                    
+             
+                }
+                else if (e.getSource() == crearExamen)
+                {
+                    pGeneral.setVisible(false);
+                    crearGUI2();
+                }
+    
+            }
     }
 }
 
