@@ -25,7 +25,7 @@ public class GUIMiniProyecto3 extends JFrame {
     {
         setTitle("Examenes Conectados");
         setSize(580,500);
-        crearGUIP();
+        crearGUIPresen();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
