@@ -17,12 +17,13 @@ public class ClaseArchivo {
             return; 
         }  
         try{
-        FileWriter fw = new FileWriter(examen, true); 
-        // Escribe en el archivo
-        fw.append(nomExamen+"\n");
-        fw.append(Tiempo+"\n");
-        fw.append("-----------------------");
-        fw.close();
+            // Escribe en el archivo
+            try (FileWriter fw = new FileWriter(examen, true)) {
+                // Escribe en el archivo
+                fw.append(nomExamen+"\n");
+                fw.append(Tiempo+"\n");
+                fw.append("-----------------------");
+            }
         System.out.println("Archivo "+ nomExamen+ " creado exitosamente.");
         }catch (IOException ex) {
             System.out.println("Error al Escribir en el archivo de examen.");

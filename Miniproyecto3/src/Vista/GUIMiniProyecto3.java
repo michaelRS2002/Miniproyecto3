@@ -7,9 +7,9 @@ package Vista;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import Controlador.Controlador;
 
 public class GUIMiniProyecto3 extends JFrame {
    
@@ -20,6 +20,10 @@ public class GUIMiniProyecto3 extends JFrame {
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
     JButton jbGuardarP, jbTerminarCE;
+    String nombreExamen, tiempoExamen;
+    private Controlador control;
+    
+    
    
     
     public GUIMiniProyecto3()
@@ -31,6 +35,10 @@ public class GUIMiniProyecto3 extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
+    }
+    public void setControlador(Controlador control) {
+        this.control = control;
     }
     
     
@@ -110,6 +118,7 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     
     public void crearGUI2(){
+        panelNomExamen();
         int num_pregunta = 1;
         //Paneles Para Crear Examanes
         JPanel JPregRes,JEnunciadoN,JEnunciado,JRespuestas, jpbotones;
@@ -118,7 +127,7 @@ public class GUIMiniProyecto3 extends JFrame {
             //Panel Enunciado Norte
             JEnunciadoN= new JPanel(new BorderLayout());
             //Panel Enunciado Text
-            JEnunciado= new JPanel();
+            JEnunciado= new JPanel(new BorderLayout());
             //Panel Respuestas
             JRespuestas = new JPanel(new GridLayout(5,2,2,2));
         //Panel Botones
@@ -194,9 +203,38 @@ public class GUIMiniProyecto3 extends JFrame {
         revalidate();
         
     }
+    public void panelNomExamen(){
+        // Crear un cuadro de diálogo para obtener el nombre del examen y el tiempo
+    JTextField nombreExamenField = new JTextField();
+    JTextField tiempoExamenField = new JTextField();
+
+    Object[] message = {
+            "Nombre del examen:", nombreExamenField,
+            "Tiempo de examen:", tiempoExamenField
+    };
+
+    int option = JOptionPane.showConfirmDialog(null, message, "Nombre-Tiempo del examen", JOptionPane.OK_CANCEL_OPTION);
+
+    if (option == JOptionPane.OK_OPTION) {
+        nombreExamen = nombreExamenField.getText();
+        tiempoExamen = tiempoExamenField.getText();
+        control.crearExamen();
+
+        // Aquí puedes utilizar los valores obtenidos (nombreExamen y tiempoExamen)
+        // para lo que necesites en tu aplicación.
+    }
+
+        
+    }
     
     public void crearGUI3(){
         
+    }
+    public String getNomExam(){
+        return nombreExamen;
+    }
+    public String getTiempoExam(){
+        return tiempoExamen;
     }
     
     //Clase manejadora de Eventos
