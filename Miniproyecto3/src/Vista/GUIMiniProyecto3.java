@@ -13,8 +13,9 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GUIMiniProyecto3 extends JFrame {
    
-    JLabel lNom, lImagenMenu, lCrearExamen, lR1, lR2, lR3, lR4, lEnunP;
-    JTextField jtPresen;
+    JLabel lNom, lImagenMenu, lCrearExamen,
+    EnunPN,uno,dos,tres,cuatro,cinco;
+    JTextField jtPresen,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
@@ -109,17 +110,49 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     
     public void crearGUI2(){
-        
-        //JLabel para las respuestas "Estos son los que hacen el return"
-        JPanel jppregYenun,jpbotones;
-        jppregYenun = new JPanel(new GridLayout(6,1,2,2));
+        int num_pregunta = 1;
+        //Paneles Para Crear Examanes
+        JPanel JPregRes,JEnunciadoN,JEnunciado,JRespuestas, jpbotones;
+        //Panel Enunciado-Pregunta
+        JPregRes = new JPanel(new BorderLayout());
+            //Panel Enunciado Norte
+            JEnunciadoN= new JPanel(new BorderLayout());
+            //Panel Enunciado Text
+            JEnunciado= new JPanel();
+            //Panel Respuestas
+            JRespuestas = new JPanel(new GridLayout(5,2,2,2));
+        //Panel Botones
         jpbotones = new JPanel();
         jpbotones.setLayout(new BoxLayout(jpbotones, BoxLayout.Y_AXIS));
-        lR1 = new JLabel("R1"); //EDITAR 
-        lR2 = new JLabel("R2"); //EDITAR
-        lR3 = new JLabel("R3"); //EDITAR
-        lR4 = new JLabel("R4"); //EDITAR
+        //Atributos Panel Enunciado
+        EnunPN = new JLabel("Enunciado Pregunta N°: ");
         
+        JTextField NPregunta = new JTextField();
+        NPregunta.setText(Integer.toString(num_pregunta));
+        
+        JTextArea textArea = new JTextArea(2, 10); // 5 filas, 20 columnas
+
+        // Agregar el JTextArea a un JScrollPane para permitir el desplazamiento
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        //lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
+        /**
+         * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
+         * otro que contenga como tal la pregunta con el fin de quede bien organizado"
+         */
+        uno = new JLabel("A ");
+        dos = new JLabel("B ");
+        tres = new JLabel("C ");
+        cuatro = new JLabel("D ");
+        cinco = new JLabel("Correcta");
+        //JTextField  para las respuestas "Estos son los que hacen el return"
+        jR1 = new JTextField("", ALLBITS); //EDITAR
+        jR2 = new JTextField("",ALLBITS); //EDITAR
+        jR3 = new JTextField("",ALLBITS); //EDITAR
+        jR4 = new JTextField("",ALLBITS);
+        jRespuesta = new JTextField("",ALLBITS);//EDITAR
+        
+        //JButton
         jbGuardarP = new JButton("<html>Guardar"
                                + "Pregunta<br>");
         jbGuardarP.setPreferredSize(new Dimension(50,50));
@@ -132,26 +165,23 @@ public class GUIMiniProyecto3 extends JFrame {
         Font forte = new Font("Comic Sans", Font.ROMAN_BASELINE, 20);
         lCrearExamen.setFont(forte);
         lCrearExamen.setHorizontalAlignment(JLabel.CENTER);
-        pCExamen = new JPanel(new GridLayout(1,2));
-        JTextField NPregunta = new JTextField("");
-        JLabel EnunPN = new JLabel("Enunciado Pregunta N°: " + NPregunta);
-        lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
+        //pCExamen = new JPanel(new GridLayout(1,2));
         
-        /**
-         * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
-         * otro que contenga como tal la pregunta con el fin de quede bien organizado"
-         */
-        JLabel uno = new JLabel("1. " + lR1);
-        JLabel dos = new JLabel("2. " + lR2);
-        JLabel tres = new JLabel("3. " + lR3);
-        JLabel cuat = new JLabel("4. " + lR4);
-        
-        jppregYenun.add(EnunPN);
-        jppregYenun.add(lEnunP); 
-        jppregYenun.add(uno);
-        jppregYenun.add(dos); 
-        jppregYenun.add(tres); 
-        jppregYenun.add(cuat);
+        //Añadir Elementos Panel Enunciado-Respuestas
+            //Panel Enunciado Norte
+            JEnunciadoN.add(EnunPN,BorderLayout.CENTER);
+            JEnunciadoN.add(NPregunta,BorderLayout.EAST);
+            //Panel Enunciado
+            JEnunciado.add(JEnunciadoN,BorderLayout.NORTH);
+            JEnunciado.add(scrollPane,BorderLayout.CENTER);
+            //Panel Respuestas
+            JRespuestas.add(uno);JRespuestas.add(jR1);
+            JRespuestas.add(dos); JRespuestas.add(jR2);
+            JRespuestas.add(tres); JRespuestas.add(jR3);
+            JRespuestas.add(cuatro);JRespuestas.add(jR4);
+            JRespuestas.add(cinco);JRespuestas.add(jRespuesta);
+        JPregRes.add(JEnunciado,BorderLayout.NORTH);
+        JPregRes.add(JRespuestas,BorderLayout.CENTER);
         
         jpbotones.add(Box.createVerticalStrut(160));
         jpbotones.add(jbGuardarP);
@@ -159,7 +189,7 @@ public class GUIMiniProyecto3 extends JFrame {
          
         //pCExamen.add(lCrearExamen, BorderLayout.NORTH);
         add(lCrearExamen, BorderLayout.NORTH);
-        add(jppregYenun, BorderLayout.CENTER);
+        add(JPregRes, BorderLayout.CENTER);
         add(jpbotones, BorderLayout.EAST);
         revalidate();
         
