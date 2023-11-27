@@ -10,16 +10,18 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import Controlador.Controlador;
+import javax.swing.border.EmptyBorder;
+
 
 public class GUIMiniProyecto3 extends JFrame {
    
     JLabel lNom, lImagenMenu, lCrearExamen,
-    EnunPN,uno,dos,tres,cuatro,cinco;
+    EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3, lR4, lEnunP;
     JTextField jtPresen,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
-    JButton jbGuardarP, jbTerminarCE;
+    JButton jbGuardarP, jbTerminarCE, jbCancelar,jbObtener;
     String nombreExamen, tiempoExamen;
     private Controlador control;
     
@@ -236,6 +238,90 @@ public class GUIMiniProyecto3 extends JFrame {
     public String getTiempoExam(){
         return tiempoExamen;
     }
+    public void crearGUI5(){
+        
+        //JLabel para las respuestas "Estos son los que hacen el return"
+        JPanel jppregYenun,jpbotones,jpEstado,jpListPregn, jpEste;
+        JCheckBox uno,dos,tres,cuat;
+        jppregYenun = new JPanel(new GridLayout(6,1));
+        jppregYenun.setBorder(new EmptyBorder(10,10,10,10));
+        jpbotones = new JPanel(new GridLayout(1,3,5,5));
+        jpbotones.setBorder(new EmptyBorder(10,10,10,10));
+        jpEste = new JPanel(new GridLayout(2,1));
+        jpEste.setPreferredSize(new Dimension(150,100));
+        jpEstado = new JPanel();
+        jpListPregn = new JPanel();
+        
+        lR1 = new JLabel("R1"); //EDITAR 
+        lR2 = new JLabel("R2"); //EDITAR
+        lR3 = new JLabel("R3"); //EDITAR
+        lR4 = new JLabel("R4"); //EDITAR
+        
+        jbGuardarP = new JButton("<html>Guardar"
+                               + "Pregunta<br>");
+        jbGuardarP.setPreferredSize(new Dimension(50,50));
+        
+        jbCancelar = new JButton("Cancelar");
+        jbCancelar.setPreferredSize(new Dimension(50,50));
+        
+        jbTerminarCE = new JButton("<html>Terminar"
+                                 + "Examen<br>");
+        jbTerminarCE.setPreferredSize(new Dimension(50,50));
+        
+        lCrearExamen = new JLabel("Crear examenes");
+        Font forte = new Font("Comic Sans", Font.ROMAN_BASELINE, 20);
+        lCrearExamen.setFont(forte);
+        lCrearExamen.setHorizontalAlignment(JLabel.CENTER);
+        pCExamen = new JPanel(new GridLayout(1,2));
+        JTextField NPregunta = new JTextField("");
+        JLabel EnunPN = new JLabel("Enunciado Pregunta N°: " + NPregunta.getText());
+        lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
+        
+        //jpEste design
+        jpEstado.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE,2),"Estado"));
+        jpListPregn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED,2),"Listado Preguntas"));
+        
+        //Lista desplegable EDITAR
+        String[] NumPreguntas = {"1","2","3","4","5","6","7","8"};
+        JComboBox<String> ElegirPregunta = new JComboBox<>(NumPreguntas);
+        
+        jbObtener = new JButton("Obtener"); //Añadir el Listener
+        
+        /**
+         * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
+         * otro que contenga como tal la pregunta con el fin de quede bien organizado"
+         */
+        //pd 1: Se usa los .getText() para evitar meter un JLabel dentro de un JLabel "Lanza una excepcion"
+        uno = new JCheckBox("1. " + lR1.getText());
+        dos = new JCheckBox("2. " + lR2.getText());
+        tres = new JCheckBox("3. " + lR3.getText());
+        cuat = new JCheckBox("4. " + lR4.getText());
+        
+        jppregYenun.add(EnunPN);
+        jppregYenun.add(lEnunP); 
+        jppregYenun.add(uno);
+        jppregYenun.add(dos); 
+        jppregYenun.add(tres); 
+        jppregYenun.add(cuat);
+        
+        jpEste.add(jpListPregn);
+        jpEste.add(jpEstado);
+               
+        jpListPregn.add(ElegirPregunta,BorderLayout.WEST);
+        jpListPregn.add(jbObtener, BorderLayout.EAST);
+        
+        jpbotones.add(jbCancelar); //Hace que la pregunta seleccionada sea desseleccionada
+        jpbotones.add(jbGuardarP); //Guarda la respuesta del estudiante
+        jpbotones.add(jbTerminarCE); //Hace que el examen termine
+         
+        //pCExamen.add(lCrearExamen, BorderLayout.NORTH);
+        add(lCrearExamen, BorderLayout.NORTH);
+        add(jppregYenun, BorderLayout.CENTER);
+        add(jpEste, BorderLayout.EAST);
+        add(jpbotones, BorderLayout.SOUTH);
+        revalidate();
+        
+    }
     
     //Clase manejadora de Eventos
     class ClaseManejadoraEventos implements ActionListener
@@ -250,6 +336,11 @@ public class GUIMiniProyecto3 extends JFrame {
                     //pCExamen.setVisible(true);
                     crearExamen.setEnabled(false);
                     crearGUI2();
+                }
+                if (e.getSource() == realizarExamen)
+                {
+                    crearExamen.setEnabled(false);
+                    crearGUI5();
                 }
     
             }
