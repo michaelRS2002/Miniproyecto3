@@ -17,11 +17,15 @@ public class GUIMiniProyecto3 extends JFrame {
    
     JLabel lNom, lImagenMenu, lCrearExamen,
     EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3, lR4, lEnunP;
-    JTextField jtPresen,jR1, jR2, jR3, jR4,jRespuesta;
+    JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
     JButton jbGuardarP, jbTerminarCE, jbCancelar,jbObtener;
+    JTextArea textArea;
+    JScrollPane scrollPane;
+    
+    int num_pregunta= 0;
     String nombreExamen, tiempoExamen;
     private Controlador control;
     
@@ -121,7 +125,7 @@ public class GUIMiniProyecto3 extends JFrame {
     
     public void crearGUI2(){
         panelNomExamen();
-        int num_pregunta = 1;
+        num_pregunta++;
         //Paneles Para Crear Examanes
         JPanel JPregRes,JEnunciadoN,JEnunciado,JRespuestas, jpbotones;
         //Panel Enunciado-Pregunta
@@ -138,13 +142,13 @@ public class GUIMiniProyecto3 extends JFrame {
         //Atributos Panel Enunciado
         EnunPN = new JLabel("Enunciado Pregunta N°: ");
         
-        JTextField NPregunta = new JTextField();
+        NPregunta= new JTextField();
         NPregunta.setText(Integer.toString(num_pregunta));
         
-        JTextArea textArea = new JTextArea(2, 10); // 5 filas, 20 columnas
+        textArea = new JTextArea(2, 10); // 5 filas, 20 columnas
 
         // Agregar el JTextArea a un JScrollPane para permitir el desplazamiento
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane = new JScrollPane(textArea);
         
         //lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
         /**
@@ -203,6 +207,8 @@ public class GUIMiniProyecto3 extends JFrame {
         add(JPregRes, BorderLayout.CENTER);
         add(jpbotones, BorderLayout.EAST);
         revalidate();
+        ClaseManejadoraEventos eva = new ClaseManejadoraEventos();
+        jbGuardarP.addActionListener(eva);
         
     }
     public void panelNomExamen(){
@@ -237,6 +243,35 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     public String getTiempoExam(){
         return tiempoExamen;
+    }
+    public String getNumPregunta(){
+        return Integer.toString(num_pregunta);
+    }
+    public String getEnunciado(){
+        return textArea.getText();
+    }
+    public String getR1(){
+        return jR1.getText() ;
+    }
+    public String getR2(){
+        return jR2.getText();
+    }
+    public String getR3(){
+        return jR3.getText();
+    }
+    public String getR4(){
+        return jR4.getText();
+    }
+    public String getCorrecta(){
+        return jRespuesta.getText();
+    }
+    public void borrarTextos(){
+        textArea.setText("");
+        jR1.setText("");
+        jR2.setText("");
+        jR3.setText("");
+        jR4.setText("");
+        jRespuesta.setText("");
     }
     public void crearGUI5(){
         
@@ -342,7 +377,13 @@ public class GUIMiniProyecto3 extends JFrame {
                     crearExamen.setEnabled(false);
                     crearGUI5();
                 }
-    
+                if (e.getSource()== jbGuardarP)
+                {
+                    control.GuardarPreguntas();
+                    num_pregunta++;
+                    NPregunta.setText(Integer.toString(num_pregunta));
+                    borrarTextos();
+                }
             }
     }
 }

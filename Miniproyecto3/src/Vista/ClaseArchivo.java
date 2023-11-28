@@ -1,7 +1,7 @@
 package Vista;
 
 import java.io.*;
-import java.util.Scanner;
+//import java.util.Scanner;
 /**
  *
  * @author Asus Michael
@@ -22,7 +22,7 @@ public class ClaseArchivo {
                 // Escribe en el archivo
                 fw.append(nomExamen+"\n");
                 fw.append(Tiempo+"\n");
-                fw.append("-----------------------");
+                fw.append("-----------------------------------------------------\n");
             }
         System.out.println("Archivo "+ nomExamen+ " creado exitosamente.");
         }catch (IOException ex) {
@@ -30,23 +30,27 @@ public class ClaseArchivo {
         }
     }
     
-   
-    
-    public static void escribirPregunta()
+    public static void escribirPregunta(String nomExamen,String numPregunta,String E,String R1,String R2,String R3,String R4,String Correcta)
     {
         try {
-            FileWriter fw = new FileWriter(new File("src\\prueba.txt"),true);
-            for (int i = 9; i < 50; i+=2)
-            {
-                fw.append(""+i+"\n");
+            try (FileWriter fw = new FileWriter("src\\Examenes\\" + nomExamen + ".txt",true)) {
+                // Escribe en el archivo
+                fw.append("Pregunta N° "+numPregunta+"\n");
+                fw.append(E+"\n");
+                fw.append("-------Opciones----------------\n");
+                fw.append(R1+"\n");
+                fw.append(R2+"\n");
+                fw.append(R3+"\n");
+                fw.append(R4+"\n");
+                fw.append("-------Correcta----------------\n");
+                fw.append(Correcta+"\n");
+                fw.append("-----------------------------------------------------\n");
             }
-            fw.close();
         } catch (IOException ex) {
             System.out.println("no encontró el archivo a escribir");
-        }
-        
+        } 
     }
-    
+ /*   
     public static void leerScanner()
     {
         try {
@@ -73,7 +77,7 @@ public class ClaseArchivo {
             /*int num;
             while((num = fr.read())!= -1){
                 System.out.println((char)num);
-            }*/
+            }
             
             String linea;
             while((linea=br.readLine())!=null){
@@ -96,6 +100,5 @@ public class ClaseArchivo {
         }
 
         
-    }
-    
+    }*/
 }
