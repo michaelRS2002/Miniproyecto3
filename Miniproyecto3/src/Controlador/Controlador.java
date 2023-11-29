@@ -1,6 +1,6 @@
 package Controlador;
 
-import Vista.ClaseArchivo;
+import Modelo.ClaseArchivo;
 import Vista.GUIMiniProyecto3;
 
 public class Controlador {
