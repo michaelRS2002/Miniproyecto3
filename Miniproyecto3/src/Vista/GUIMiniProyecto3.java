@@ -275,6 +275,7 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     public void crearGUI5(){
         
+        
         //JLabel para las respuestas "Estos son los que hacen el return"
         JPanel jppregYenun,jpbotones,jpEstado,jpListPregn, jpEste;
         JCheckBox uno,dos,tres,cuat;
@@ -386,5 +387,11 @@ public class GUIMiniProyecto3 extends JFrame {
                 }
             }
     }
+    // Mostrar un mensaje de error si no se conecta el usuario debidamente 
+
+public void mostrarMensaje(String mensaje){
+
+textArea.append (mensaje);
+}
 }
 
