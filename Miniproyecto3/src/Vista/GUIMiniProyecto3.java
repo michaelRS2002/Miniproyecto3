@@ -107,12 +107,15 @@ public class GUIMiniProyecto3 extends JFrame {
         verInformes.setHorizontalAlignment(JMenuItem.CENTER);
         realizarExamen = new JMenuItem("Realizar Examen");
         realizarExamen.setHorizontalAlignment(JMenuItem.CENTER);
+        
        
         barra.add(crearExamen);
         barra.add(verExamenes);
         barra.add(verInformes);
         barra.add(realizarExamen);
         setJMenuBar(barra);
+        
+        
                         
         ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
         //inicio.addActionListener(ev);
@@ -120,6 +123,7 @@ public class GUIMiniProyecto3 extends JFrame {
         verExamenes.addActionListener(ev);
         verInformes.addActionListener(ev);
         realizarExamen.addActionListener(ev);
+        
      
     }
     
@@ -278,6 +282,7 @@ public class GUIMiniProyecto3 extends JFrame {
         
         //JLabel para las respuestas "Estos son los que hacen el return"
         JPanel jppregYenun,jpbotones,jpEstado,jpListPregn, jpEste;
+        JDialog jdConexion;
         JCheckBox uno,dos,tres,cuat;
         jppregYenun = new JPanel(new GridLayout(6,1));
         jppregYenun.setBorder(new EmptyBorder(10,10,10,10));
@@ -288,10 +293,16 @@ public class GUIMiniProyecto3 extends JFrame {
         jpEstado = new JPanel();
         jpListPregn = new JPanel();
         
+        //Dialog de conexion de los usuarios
+        barraConexion();
+        
         lR1 = new JLabel("R1"); //EDITAR 
         lR2 = new JLabel("R2"); //EDITAR
         lR3 = new JLabel("R3"); //EDITAR
         lR4 = new JLabel("R4"); //EDITAR
+        
+     
+        
         
         jbGuardarP = new JButton("<html>Guardar"
                                + "Pregunta<br>");
@@ -333,6 +344,8 @@ public class GUIMiniProyecto3 extends JFrame {
         tres = new JCheckBox("3. " + lR3.getText());
         cuat = new JCheckBox("4. " + lR4.getText());
         
+        
+        
         jppregYenun.add(EnunPN);
         jppregYenun.add(lEnunP); 
         jppregYenun.add(uno);
@@ -357,7 +370,24 @@ public class GUIMiniProyecto3 extends JFrame {
         add(jpbotones, BorderLayout.SOUTH);
         revalidate();
         
+        
     }
+    public void barraConexion()
+        {
+            JFrame jfConexion;
+            JTextArea textArea;
+              jfConexion = new JFrame("Conexion Usuarios");
+              jfConexion.setSize(320,320);
+              jfConexion.setLocation(1044, 200);
+              jfConexion.setVisible(true);
+              //Area para saber los usuarios conectados
+             
+              textArea = new JTextArea();
+              textArea.setName("Usuarios");
+              jfConexion.add(textArea);
+    
+            
+        }
     
     //Clase manejadora de Eventos
     class ClaseManejadoraEventos implements ActionListener
