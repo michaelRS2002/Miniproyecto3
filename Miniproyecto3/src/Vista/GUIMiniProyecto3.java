@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import Controlador.Controlador;
+import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 
 
@@ -234,11 +235,31 @@ public class GUIMiniProyecto3 extends JFrame {
 
         // Aquí puedes utilizar los valores obtenidos (nombreExamen y tiempoExamen)
         // para lo que necesites en tu aplicación.
+    }    
     }
+    public void ExamLauncher() {
+        // Crear un modelo para la lista desplegable
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>(control.);
 
-        
+        // Crear un panel de entrada con la lista desplegable
+        JComboBox<String> comboBox = new JComboBox<>(modelo);
+        Object[] message = {
+                "Seleccione un archivo .txt:", comboBox
+        };
+        // Mostrar el panel de confirmación
+        int options = JOptionPane.showConfirmDialog(null, message, "Preparado para lanzar el examen?", JOptionPane.OK_CANCEL_OPTION);
+
+        // Verificar la respuesta del usuario
+        if (options == JOptionPane.OK_OPTION) {
+            // Obtener el archivo seleccionado
+            String archivoSeleccionado = (String) comboBox.getSelectedItem();
+            System.out.println("Archivo seleccionado: " + archivoSeleccionado);
+            // Aquí puedes realizar acciones adicionales según la selección del usuario
+        } else {
+            System.out.println("El usuario canceló la operación.");
+            // Puedes realizar acciones adicionales en caso de cancelación
+        }
     }
-    
     public void crearGUI3(){
         
     }
