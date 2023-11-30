@@ -43,7 +43,7 @@ public class Controlador {
     public String[] TraerExamenes(){
         ArrayList<String> archivos = Logica.obtenerArchivosTxt("src\\Examenes");
         archivos.toArray(new String[]);
-        return archivos;
+        return archivos;dd
     }
 }
 
