@@ -1,4 +1,3 @@
-/*
 
 package Servidor;
 import Vista.GUIMiniProyecto3;
@@ -7,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.ServerSocket;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 public class ServidorProfesor {
     
@@ -19,7 +20,7 @@ public class ServidorProfesor {
     static GUIMiniProyecto3 guiS;
     
     public static void ejecutarServidor(){
-        guiS = new GUIMiniProyecto3();
+             //guiS = new GUIMiniProyecto3();
        try {
            servidor = new ServerSocket (1000, 2);
            while (true){
@@ -58,7 +59,7 @@ public class ServidorProfesor {
     
         String mensaje = "Conexión éxitosa";
         enviarDatos(mensaje);
-        guiS.habilitarCampo(true);
+
     }
     
     public static void enviarDatos(String mensje){
@@ -75,4 +76,3 @@ public class ServidorProfesor {
     
 }
 
-*/

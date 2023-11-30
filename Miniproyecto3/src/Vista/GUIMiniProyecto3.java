@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import Controlador.Controlador;
+import Servidor.ServidorProfesor;
 import javax.swing.border.EmptyBorder;
 
 
@@ -231,10 +232,12 @@ public class GUIMiniProyecto3 extends JFrame {
         nombreExamen = nombreExamenField.getText();
         tiempoExamen = tiempoExamenField.getText();
         control.crearExamen();
+  
 
         // Aquí puedes utilizar los valores obtenidos (nombreExamen y tiempoExamen)
         // para lo que necesites en tu aplicación.
     }
+    
 
         
     }
@@ -276,6 +279,23 @@ public class GUIMiniProyecto3 extends JFrame {
         jR3.setText("");
         jR4.setText("");
         jRespuesta.setText("");
+    }
+    
+    public void nombreUsuarios()
+    {
+        JOptionPane mensajeEmergente;
+        mensajeEmergente = new JOptionPane();
+        mensajeEmergente.showInputDialog(null, "Nombre del usuario", "Examenes conectados", JOptionPane.QUESTION_MESSAGE);
+   
+       if (mensajeEmergente.YES_OPTION == 0)
+               {
+                   crearGUI5();
+               }
+       if (mensajeEmergente.CANCEL_OPTION == 0)
+       {
+           
+       }
+    
     }
     public void crearGUI5(){
         
@@ -383,6 +403,7 @@ public class GUIMiniProyecto3 extends JFrame {
               //Area para saber los usuarios conectados
              
               textArea = new JTextArea();
+              textArea.setEditable(false);
               textArea.setName("Usuarios");
               jfConexion.add(textArea);
     
@@ -406,7 +427,8 @@ public class GUIMiniProyecto3 extends JFrame {
                 if (e.getSource() == realizarExamen)
                 {
                     crearExamen.setEnabled(false);
-                    crearGUI5();
+                    nombreUsuarios();
+                    ServidorProfesor.ejecutarServidor();
                 }
                 if (e.getSource()== jbGuardarP)
                 {
