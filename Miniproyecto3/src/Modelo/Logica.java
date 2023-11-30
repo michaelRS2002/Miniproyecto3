@@ -12,6 +12,7 @@ public class Logica {
     public Logica(){
     }
     public static  ArrayList<String> obtenerArchivosTxt(String directorio) {
+        
         ArrayList<String> archivos = new ArrayList<>();
         File folder = new File(directorio);
         File[] files = folder.listFiles();

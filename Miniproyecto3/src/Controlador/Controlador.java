@@ -41,9 +41,10 @@ public class Controlador {
         ClaseArchivo.escribirPregunta(nom, numPregunta, enunciado, R1, R2, R3, R4, Correcta);
     }
     public String[] TraerExamenes(){
-        ArrayList<String> archivos = Logica.obtenerArchivosTxt("src\\Examenes");
-        archivos.toArray(new String[]);
-        return archivos;dd
+        ArrayList<String> archivos = Logica.obtenerArchivosTxt("src/Examenes");
+        String[] archivosArray = archivos.toArray(String[]::new);
+        System.out.println(archivosArray[0]);
+        return archivosArray;
     }
 }
 

@@ -239,7 +239,7 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     public void ExamLauncher() {
         // Crear un modelo para la lista desplegable
-        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>(control.);
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>(control.TraerExamenes());
 
         // Crear un panel de entrada con la lista desplegable
         JComboBox<String> comboBox = new JComboBox<>(modelo);
@@ -427,6 +427,7 @@ public class GUIMiniProyecto3 extends JFrame {
                 if (e.getSource() == realizarExamen)
                 {
                     crearExamen.setEnabled(false);
+                    ExamLauncher();
                     crearGUI5();
                 }
                 if (e.getSource()== jbGuardarP)
