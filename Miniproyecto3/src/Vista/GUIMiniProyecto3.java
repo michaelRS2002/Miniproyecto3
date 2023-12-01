@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class GUIMiniProyecto3 extends JFrame {
    
     JLabel lNom, lImagenMenu, lCrearExamen,
-    EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3, lR4, lEnunP;
+    EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3, lR4, lEnunP,lNumPregunta,lEnunciado;
     JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
@@ -27,7 +27,7 @@ public class GUIMiniProyecto3 extends JFrame {
     JScrollPane scrollPane;
     
     int num_pregunta= 0;
-    String nombreExamen, tiempoExamen;
+    String nombreExamen, tiempoExamen,ExamenARealizar;
     private Controlador control;
     
     
@@ -129,6 +129,7 @@ public class GUIMiniProyecto3 extends JFrame {
     }
     
     public void crearGUI2(){
+        
         panelNomExamen();
         num_pregunta++;
         //Paneles Para Crear Examanes
@@ -255,6 +256,14 @@ public class GUIMiniProyecto3 extends JFrame {
             // Obtener el archivo seleccionado
             String archivoSeleccionado = (String) comboBox.getSelectedItem();
             System.out.println("Archivo seleccionado: " + archivoSeleccionado);
+            int posPunto = archivoSeleccionado.lastIndexOf(".");
+
+        if (posPunto > 0) {
+            ExamenARealizar = archivoSeleccionado.substring(0, posPunto);
+            System.out.println("Nombre del archivo sin extensión: " + ExamenARealizar);
+        } else {
+            System.out.println("La extensión del archivo no se encontró.");
+        }
             // Aquí puedes realizar acciones adicionales según la selección del usuario
         } else {
             System.out.println("El usuario canceló la operación.");
@@ -265,33 +274,7 @@ public class GUIMiniProyecto3 extends JFrame {
     public void crearGUI3(){
         
     }
-    public String getNomExam(){
-        return nombreExamen;
-    }
-    public String getTiempoExam(){
-        return tiempoExamen;
-    }
-    public String getNumPregunta(){
-        return Integer.toString(num_pregunta);
-    }
-    public String getEnunciado(){
-        return textArea.getText();
-    }
-    public String getR1(){
-        return jR1.getText() ;
-    }
-    public String getR2(){
-        return jR2.getText();
-    }
-    public String getR3(){
-        return jR3.getText();
-    }
-    public String getR4(){
-        return jR4.getText();
-    }
-    public String getCorrecta(){
-        return jRespuesta.getText();
-    }
+    
     public void borrarTextos(){
         textArea.setText("");
         jR1.setText("");
@@ -332,16 +315,18 @@ public class GUIMiniProyecto3 extends JFrame {
         jpEste.setPreferredSize(new Dimension(150,100));
         jpEstado = new JPanel();
         jpListPregn = new JPanel();
+        lR1 = new JLabel(""); //EDITAR 
+        lR2 = new JLabel(""); //EDITAR
+        lR3 = new JLabel(""); //EDITAR
+        lR4 = new JLabel("");
+        
         
         //Dialog de conexion de los usuarios
         barraConexion();
         
-        lR1 = new JLabel("R1"); //EDITAR 
-        lR2 = new JLabel("R2"); //EDITAR
-        lR3 = new JLabel("R3"); //EDITAR
-        lR4 = new JLabel("R4"); //EDITAR
+         //EDITAR
         
-     
+        
         
         
         jbGuardarP = new JButton("<html>Guardar"
@@ -360,8 +345,8 @@ public class GUIMiniProyecto3 extends JFrame {
         lCrearExamen.setFont(forte);
         lCrearExamen.setHorizontalAlignment(JLabel.CENTER);
         pCExamen = new JPanel(new GridLayout(1,2));
-        JTextField NPregunta = new JTextField("");
-        JLabel EnunPN = new JLabel("Enunciado Pregunta N°: " + NPregunta.getText());
+        lNumPregunta = new JLabel("");
+        lEnunciado = new JLabel("Enunciado Pregunta N°: " + lNumPregunta.getText());
         lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
         
         //jpEste design
@@ -373,7 +358,10 @@ public class GUIMiniProyecto3 extends JFrame {
         JComboBox<String> ElegirPregunta = new JComboBox<>(NumPreguntas);
         
         jbObtener = new JButton("Obtener"); //Añadir el Listener
-        
+        TraerPreguntas(ExamenARealizar);
+        System.out.println("Ya me ejecute"+lR1.getText());
+        lEnunciado.setText("Enunciado Pregunta N°: " + lNumPregunta.getText());
+
         /**
          * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
          * otro que contenga como tal la pregunta con el fin de quede bien organizado"
@@ -386,7 +374,7 @@ public class GUIMiniProyecto3 extends JFrame {
         
         
         
-        jppregYenun.add(EnunPN);
+        jppregYenun.add(lEnunciado);
         jppregYenun.add(lEnunP); 
         jppregYenun.add(uno);
         jppregYenun.add(dos); 
@@ -412,6 +400,11 @@ public class GUIMiniProyecto3 extends JFrame {
         
         
     }
+    public void TraerPreguntas(String ExamenA){
+      //  this.ExamenARealizar=ExamenARealizar;
+        control.RecuperarPreguntas(ExamenA);
+        
+    }
     public void barraConexion()
         {
             JFrame jfConexion;
@@ -429,6 +422,52 @@ public class GUIMiniProyecto3 extends JFrame {
     
             
         }
+    public void setNumPregunta(int Opc){
+        lNumPregunta.setText(Integer.toString(Opc));
+    }
+    public void setEnun(String Opc){
+        lEnunP.setText(Opc);
+    }
+    public void setLabelR1(String Opc){
+        lR1.setText(Opc);
+    }
+    public void setLabelR2(String Opc){
+        lR2.setText(Opc);
+    }
+    public void setLabelR3(String Opc){
+        lR3.setText(Opc);
+    }
+    public void setLabelR4(String Opc){
+        lR4.setText(Opc);
+    }
+    
+    public String getNomExam(){
+        return nombreExamen;
+    }
+    public String getTiempoExam(){
+        return tiempoExamen;
+    }
+    public String getNumPregunta(){
+        return Integer.toString(num_pregunta);
+    }
+    public String getEnunciado(){
+        return textArea.getText();
+    }
+    public String getR1(){
+        return jR1.getText() ;
+    }
+    public String getR2(){
+        return jR2.getText();
+    }
+    public String getR3(){
+        return jR3.getText();
+    }
+    public String getR4(){
+        return jR4.getText();
+    }
+    public String getCorrecta(){
+        return jRespuesta.getText();
+    }
     
     //Clase manejadora de Eventos
     class ClaseManejadoraEventos implements ActionListener
