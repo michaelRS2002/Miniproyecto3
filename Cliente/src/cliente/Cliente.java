@@ -1,4 +1,4 @@
-//ide 20
+
 package cliente;
 
 import java.io.IOException;
@@ -7,13 +7,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- *
+ *  Clase hecha para poder conectar al usuario con el servidor de la app
  * @author invitado
  */
 public class Cliente {
     
-
-    //Logica de un solo cliente
     //Representación del cliente
     Socket cliente;
     //Salida de datos
@@ -21,7 +19,9 @@ public class Cliente {
     //Entrada de datos
     ObjectInputStream entrada;
     
-
+/*
+    Método principal para poder iniciar la conexion
+    */
 public void ejecutarCliente()
     {
         try
@@ -35,12 +35,18 @@ public void ejecutarCliente()
             cerrarConexion();
         }
     }
+/*
+    Su funcionalidad es conectarse al servidor
+*/
 public void conectarAlServidor() throws IOException
     {
         //mostrarMensaje("Intentando establecer conexion.....");
         cliente = new Socket("127.0.0.1", 12345);
         //mostrarMensaje("Conectado a: "+cliente.getInetAddress());
     }
+/**
+ * Método para obtener y enviar datos
+ */
 public void obtenerFlujos() throws IOException
     {
         salida = new ObjectOutputStream(cliente.getOutputStream());
@@ -49,6 +55,10 @@ public void obtenerFlujos() throws IOException
         entrada = new ObjectInputStream(cliente.getInputStream());
         //mostrarMensaje("Se obtuvieron los flujos E/S");
     }
+/**
+ * Método para leer los mensajes recibidos
+ * @throws IOException 
+ */
 public void procesarConexion() throws IOException
     {
         String mensaje = "";
@@ -64,7 +74,9 @@ public void procesarConexion() throws IOException
             
         }while(!mensaje.equals("SERVIDOR>>> TERMINAR"));
     }
-    
+    /**
+     * Su funciån es que al terminar la conexion cerras los flujos 
+     */
     public void cerrarConexion()
     {
         //mostrarMensaje("cerrando conexion...");
@@ -77,6 +89,10 @@ public void procesarConexion() throws IOException
             ex.printStackTrace();
         }
     }
+    /**
+     * Envio de datos al servidor
+     * @param mensaje 
+     */
     public void enviarDatos(String mensaje)
     {
         try {

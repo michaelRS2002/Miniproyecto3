@@ -30,8 +30,9 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.EmptyBorder;
+
 /**
- *
+ *El objetivo de esta clase es dar interfaz al usuario
  * @author invitado
  */
 public class GUICliente extends JFrame{
@@ -49,7 +50,9 @@ public class GUICliente extends JFrame{
     int num_pregunta= 0;
 
    
-    
+    /**
+     * Constructor de la GUI
+     */
     public void GUIMiniProyecto3()
     {
         setTitle("Examenes Conectados");
@@ -65,7 +68,9 @@ public class GUICliente extends JFrame{
     
     
     
-    //No modificar esta, ya funciona bien x,D
+    /**
+     * Logica de la primera ventana para saludar al usuario
+     */
     public void crearGUIPresen()
     {
         
@@ -110,7 +115,9 @@ public class GUICliente extends JFrame{
         CuentaAtras.start();            
     }
     
-    //Esta como tal ya es la GUI principal del programa
+    /*
+    GUI principal que contiene el menu
+    */
     public void crearGUIP()
     {
         
@@ -257,6 +264,10 @@ public class GUICliente extends JFrame{
     //public String getTiempoExam(){
         //return tiempoExamen;
     //}
+    /**
+     * Métodos get
+     * @return 
+     */
     public String getNumPregunta(){
         return Integer.toString(num_pregunta);
     }
@@ -286,7 +297,9 @@ public class GUICliente extends JFrame{
         jR4.setText("");
         jRespuesta.setText("");
     }
-    
+    /**
+     * Método para obtener el nombre del usuario
+     */
     public void nombreUsuarios()
     {
         JOptionPane mensajeEmergente;
@@ -303,6 +316,9 @@ public class GUICliente extends JFrame{
        }
     
     }
+    /**
+     * Interfaz de realizar examen
+     */
     public void crearGUI5(){
         
         
@@ -395,6 +411,9 @@ public class GUICliente extends JFrame{
         
         
     }
+    /**
+     * Frame para poder ver los usuarios conectados
+     */
     public void barraConexion()
         {
             JFrame jfConexion;
