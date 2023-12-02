@@ -1,4 +1,8 @@
 
+/**
+ * Clase pendiente de si borrar o no
+ */
+
 package Servidor;
 import Vista.GUIMiniProyecto3;
 import java.io.IOException;

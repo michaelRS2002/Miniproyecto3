@@ -1,3 +1,8 @@
+/**
+ * Clase pendiente a documentacion
+ */
+
+
 package Modelo;
 
 import java.io.*;

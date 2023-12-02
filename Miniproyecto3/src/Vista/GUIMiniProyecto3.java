@@ -52,6 +52,9 @@ public class GUIMiniProyecto3 extends JFrame {
     private GUIServidor server;
     private Controlador control;
     
+    /**
+     * Constructor de la GUI
+     */
     public GUIMiniProyecto3()
     {
         setTitle("Examenes Conectados");
@@ -64,7 +67,9 @@ public class GUIMiniProyecto3 extends JFrame {
     public void EstablecerControlador(Controlador control) {
         this.control = control;
     }
-    //Esta como tal ya es la GUI principal del programa
+    /**
+     * GUI principal que contiene el menu
+     */
     public void crearGUIMenu()
     {
         crearGUIPresen();
@@ -97,6 +102,9 @@ public class GUIMiniProyecto3 extends JFrame {
         
      
     }
+    /**
+     * Logica de bienvenida al usuario
+     */
     public void crearGUIPresen()
     {
         
@@ -128,6 +136,9 @@ public class GUIMiniProyecto3 extends JFrame {
         //Organizar ventana
         add(pGeneral, BorderLayout.CENTER);            
     }
+    /**
+     * Creación de examenes
+     */
     public void crearGUIcrearExamenes(){
         
         panelNomExamen();
@@ -242,6 +253,9 @@ public class GUIMiniProyecto3 extends JFrame {
         // para lo que necesites en tu aplicación.
     }
     }
+    /**
+     * Logica para realizar e lexamen
+     */
     public void ExamenARealizar() {
         // Crear un modelo para la lista desplegable
         DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>(control.TraerExamenes());
@@ -299,6 +313,9 @@ public class GUIMiniProyecto3 extends JFrame {
         jRespuesta.setText("");
     }
     
+    /**
+     * Método para obtener el nombre de usuarios
+     */
     public void nombreUsuarios()
     {
         JOptionPane mensajeEmergente;
@@ -316,6 +333,9 @@ public class GUIMiniProyecto3 extends JFrame {
        }
     
     }
+    /**
+     * Panel de realizar examen
+     */
     public void crearGUI5(){
         
         
@@ -426,6 +446,9 @@ public class GUIMiniProyecto3 extends JFrame {
         JServidor.add(ServidorGui);
         add(JServidor);
     }
+    /**
+     * Pendiente a borrar o ver que se hace
+     */
     public void barraConexion()
         {
             JFrame jfConexion;
@@ -443,6 +466,10 @@ public class GUIMiniProyecto3 extends JFrame {
     
             
         }
+    /**
+     * Metodos set
+     * @param Opc 
+     */
     public void setNumPregunta(int Opc){
         lNumPregunta.setText(Integer.toString(Opc));
     }
@@ -461,6 +488,10 @@ public class GUIMiniProyecto3 extends JFrame {
     public void setLabelR4(String Opc){
         lR4.setText(Opc);
     }
+    /**
+     * Metodos get
+     * @return 
+     */
     public String getExamenMandar(){
         return ExamenARealizar;
     }
@@ -493,7 +524,9 @@ public class GUIMiniProyecto3 extends JFrame {
         return jRespuesta.getText();
     }
     
-    //Clase manejadora de Eventos
+    /**
+     * Clase manejadora de eventos
+     */
     class ClaseManejadoraEventos implements ActionListener
     {
         

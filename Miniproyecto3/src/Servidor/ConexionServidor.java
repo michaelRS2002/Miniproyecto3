@@ -10,6 +10,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * Clase utilizada para crear el servidor y permitir a los usuarios conectarse
+ * @author usuario
+ */
 public class ConexionServidor extends Thread {
     private ServerSocket servidor;
     private GUIMiniProyecto3 gui;
@@ -34,6 +38,9 @@ public class ConexionServidor extends Thread {
     }
 
     @Override
+    /**
+     * Método principal para el funcionamiento del servidor
+     */
     public void run() {
         try {
             while (contador < 3) {
@@ -55,6 +62,10 @@ public class ConexionServidor extends Thread {
         }
     }
 
+    /**
+     * La logica es para mostrar los clientes conectados y crear su hilo
+     * @param socket 
+     */
     private void adicionarCliente(Socket socket) {
         try {
             contador++;
@@ -66,6 +77,9 @@ public class ConexionServidor extends Thread {
             e.printStackTrace();
         }
     }
+    /**
+     * Método para mostrar las preguntas del examen
+     */
     public void mostrarPreguntas() 
     {
         // Obtener preguntas desde tu lógica (asumamos que las preguntas son objetos Pregunta)

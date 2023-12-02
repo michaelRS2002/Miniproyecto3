@@ -11,7 +11,10 @@ import Vista.GUIMiniProyecto3;
 import Vista.GUIServidor;
 import java.util.ArrayList;
 
-
+/**
+ * Clase del controlador en el modelo MVC
+ * @author usuario
+ */
 public class Controlador {
     private GUIMiniProyecto3 gui;
     private ClaseArchivo arc;
@@ -19,7 +22,9 @@ public class Controlador {
     private GUIServidor server;
     private ConexionServidor Ser;
     
-
+/**
+ * Herencia de la aplicacion completa en sus partes
+ */
     public Controlador() {
         this.gui = new GUIMiniProyecto3();
         this.gui.EstablecerControlador(this);
@@ -29,7 +34,9 @@ public class Controlador {
         
     }
     
-
+/**
+ * Logica de la creacion del examen
+ */
     public void crearExamen() {
         // Debes obtener el tiempo del examen desde tu GUI, asumiendo que tienes un método getTiempoExam() en tu GUI
         String nom = gui.getNomExam();
@@ -37,6 +44,9 @@ public class Controlador {
         // Llama al método del modelo para crear el archivo de examen
         ClaseArchivo.crearArchivoExamen(nom, tiempoExamen);
     }
+    /**
+     * Logica de guardar las preguntas
+     */
     public void GuardarPreguntas(){
         String nom = gui.getNomExam();
         String numPregunta = gui.getNumPregunta();

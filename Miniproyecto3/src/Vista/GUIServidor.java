@@ -1,3 +1,8 @@
+/**
+ * 
+ * Clase pendiente en si borrar o no
+ */
+
 package Vista;
 
 
