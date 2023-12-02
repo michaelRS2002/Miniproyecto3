@@ -43,7 +43,7 @@ public class GUICliente extends JFrame{
     JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
-    JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
+    JMenuItem inicio, crearExamen, verInformes, realizarExamen;
     JButton jbGuardarP, jbTerminarCE, jbCancelar,jbObtener;
     JTextArea textArea;
     JScrollPane scrollPane;
@@ -123,15 +123,11 @@ public class GUICliente extends JFrame{
         
         //Panel Menu
         barra = new JMenuBar();
-        verExamenes = new JMenuItem("Ver Examenes");
-        verExamenes.setHorizontalAlignment(JMenuItem.CENTER);
         verInformes = new JMenuItem("Ver informes");
         verInformes.setHorizontalAlignment(JMenuItem.CENTER);
         realizarExamen = new JMenuItem("Realizar Examen");
         realizarExamen.setHorizontalAlignment(JMenuItem.CENTER);
         
-      
-        barra.add(verExamenes);
         barra.add(verInformes);
         barra.add(realizarExamen);
         setJMenuBar(barra);
@@ -140,97 +136,13 @@ public class GUICliente extends JFrame{
                         
         ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
         //inicio.addActionListener(ev);
-        verExamenes.addActionListener(ev);
         verInformes.addActionListener(ev);
         realizarExamen.addActionListener(ev);
-        
-     
-    }
-    
-    public void crearGUI2(){
-        panelNomExamen();
-        num_pregunta++;
-        //Paneles Para Crear Examanes
-        JPanel JPregRes,JEnunciadoN,JEnunciado,JRespuestas, jpbotones;
-        //Panel Enunciado-Pregunta
-        JPregRes = new JPanel(new BorderLayout());
-            //Panel Enunciado Norte
-            JEnunciadoN= new JPanel(new BorderLayout());
-            //Panel Enunciado Text
-            JEnunciado= new JPanel(new BorderLayout());
-            //Panel Respuestas
-            JRespuestas = new JPanel(new GridLayout(5,2,2,2));
-        //Panel Botones
-        jpbotones = new JPanel();
-        jpbotones.setLayout(new BoxLayout(jpbotones, BoxLayout.Y_AXIS));
-        //Atributos Panel Enunciado
-        EnunPN = new JLabel("Enunciado Pregunta N°: ");
-        
-        NPregunta= new JTextField();
-        NPregunta.setText(Integer.toString(num_pregunta));
-        
-        textArea = new JTextArea(2, 10); // 5 filas, 20 columnas
 
-        // Agregar el JTextArea a un JScrollPane para permitir el desplazamiento
-        scrollPane = new JScrollPane(textArea);
-        
-        //lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
-        /**
-         * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
-         * otro que contenga como tal la pregunta con el fin de quede bien organizado"
-         */
-        uno = new JLabel("A ");
-        dos = new JLabel("B ");
-        tres = new JLabel("C ");
-        cuatro = new JLabel("D ");
-        cinco = new JLabel("Correcta");
-        //JTextField  para las respuestas "Estos son los que hacen el return"
-        jR1 = new JTextField("", ALLBITS); //EDITAR
-        jR2 = new JTextField("",ALLBITS); //EDITAR
-        jR3 = new JTextField("",ALLBITS); //EDITAR
-        jR4 = new JTextField("",ALLBITS);
-        jRespuesta = new JTextField("",ALLBITS);//EDITAR
-        
-        //JButton
-        jbGuardarP = new JButton("<html>Guardar"
-                               + "Pregunta<br>");
-        jbGuardarP.setPreferredSize(new Dimension(50,50));
-        
-        jbTerminarCE = new JButton("<html>Terminar"
-                                 + "Examen<br>");
-        jbTerminarCE.setPreferredSize(new Dimension(60,70));
-        
-        Font forte = new Font("Comic Sans", Font.ROMAN_BASELINE, 20);
-        //pCExamen = new JPanel(new GridLayout(1,2));
-        
-        //Añadir Elementos Panel Enunciado-Respuestas
-            //Panel Enunciado Norte
-            JEnunciadoN.add(EnunPN,BorderLayout.CENTER);
-            JEnunciadoN.add(NPregunta,BorderLayout.EAST);
-            //Panel Enunciado
-            JEnunciado.add(JEnunciadoN,BorderLayout.NORTH);
-            JEnunciado.add(scrollPane,BorderLayout.CENTER);
-            //Panel Respuestas
-            JRespuestas.add(uno);JRespuestas.add(jR1);
-            JRespuestas.add(dos); JRespuestas.add(jR2);
-            JRespuestas.add(tres); JRespuestas.add(jR3);
-            JRespuestas.add(cuatro);JRespuestas.add(jR4);
-            JRespuestas.add(cinco);JRespuestas.add(jRespuesta);
-        JPregRes.add(JEnunciado,BorderLayout.NORTH);
-        JPregRes.add(JRespuestas,BorderLayout.CENTER);
-        
-        jpbotones.add(Box.createVerticalStrut(160));
-        jpbotones.add(jbGuardarP);
-        jpbotones.add(jbTerminarCE);
-         
-        add(JPregRes, BorderLayout.CENTER);
-        add(jpbotones, BorderLayout.EAST);
-        revalidate();
-        ClaseManejadoraEventos eva = new ClaseManejadoraEventos();
-        jbGuardarP.addActionListener(eva);
-        
     }
-    public void panelNomExamen(){
+
+    public void panelNomExamen()
+    {
         // Crear un cuadro de diálogo para obtener el nombre del examen y el tiempo
     JTextField nombreExamenField = new JTextField();
     JTextField tiempoExamenField = new JTextField();
@@ -242,7 +154,8 @@ public class GUICliente extends JFrame{
 
     int option = JOptionPane.showConfirmDialog(null, message, "Nombre-Tiempo del examen", JOptionPane.OK_CANCEL_OPTION);
 
-    if (option == JOptionPane.OK_OPTION) {
+    if (option == JOptionPane.OK_OPTION) 
+    {
         //nombreExamen = nombreExamenField.getText();
         //tiempoExamen = tiempoExamenField.getText();
   
@@ -250,24 +163,12 @@ public class GUICliente extends JFrame{
         // Aquí puedes utilizar los valores obtenidos (nombreExamen y tiempoExamen)
         // para lo que necesites en tu aplicación.
     }
-    
 
-        
     }
-    
-    public void crearGUI3(){
-        
-    }
-    //public String getNomExam(){
-        //return nombreExamen;
-    //}
-    //public String getTiempoExam(){
-        //return tiempoExamen;
-    //}
-    /**
-     * Métodos get
-     * @return 
-     */
+/**
+ * Metodos get
+ * @return 
+ */
     public String getNumPregunta(){
         return Integer.toString(num_pregunta);
     }
