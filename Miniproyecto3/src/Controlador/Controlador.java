@@ -1,3 +1,4 @@
+//ide 20
 package Controlador;
 
 import Modelo.ClaseArchivo;
