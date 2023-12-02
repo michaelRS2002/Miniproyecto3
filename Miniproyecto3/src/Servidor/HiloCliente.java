@@ -1,12 +1,16 @@
 package Servidor;
 
+import Modelo.Pregunta;
 import Vista.GUIMiniProyecto3;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
@@ -23,21 +27,28 @@ public class HiloCliente extends Thread
     ObjectInputStream entrada;
     Socket socket;
     GUIMiniProyecto3 gui;
+    private CountDownLatch clientesListos;
+    
+    private ArrayList<Pregunta> preguntasparaCliente;
     
     
-    public HiloCliente(GUIMiniProyecto3 gui, Socket s)
+    public HiloCliente(GUIMiniProyecto3 gui, Socket s,CountDownLatch clientesListos)
     {
         this.gui = gui;
         this.socket = s;
+        this.clientesListos = clientesListos;
     }
     @Override
     public void run()
     {
         try {
             obtenerFlujos();
+            clientesListos.await();
             procesarConexion();
         } catch (IOException ex) {
             System.out.println("error al procesar la comunicacion con el cliente");
+        } catch (InterruptedException ex) {
+            System.out.println("Hilo Interrumpido");
         }finally {
             cerrarConexion();
         }
@@ -51,7 +62,7 @@ public class HiloCliente extends Thread
         gui.mostrarMensaje("Se obtuvieron flujos para la comunicación");
     }
     
-    public void enviarDatos(String mensja)
+    public void enviarDatosString(String mensja)
     {
         try {
             salida.writeObject("SERVIDOR>>> "+mensja);
@@ -66,7 +77,9 @@ public class HiloCliente extends Thread
     {
         String mensaje = "Conexión exitosa";
         //double resultado;
-        enviarDatos(mensaje);
+        enviarDatosString(mensaje);
+       
+        
         do
         {
             try {
@@ -91,7 +104,26 @@ public class HiloCliente extends Thread
             
         }while(!mensaje.equals("TERMINAR"));
         
-    }//fin procesar
+    }
+    public void recibirPreguntas(ArrayList<Pregunta> preguntas) {
+        // Almacena las preguntas recibidas en la lista local
+        preguntasparaCliente = preguntas;
+        try {
+            salida.writeObject(preguntasparaCliente);
+            salida.flush();
+            gui.mostrarMensaje("SERVIDOR>>> Examen Mandado");
+        } catch (IOException ioe) {
+            gui.mostrarMensaje("\n Error al escribir objeto");
+        }
+        
+    }
+
+    public ArrayList<Pregunta> getPreguntasRecibidas() {
+        return preguntasparaCliente;
+    }
+    
+
+//fin procesar
     
     /**
      * cerrar los flujos y el socket que representa al cliente

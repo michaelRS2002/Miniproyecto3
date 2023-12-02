@@ -1,10 +1,12 @@
 package Modelo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nicol
  */
-public class Pregunta {
+public class Pregunta implements Serializable{
     private int numero;
     private String enunciado;
     private String respuestaA;

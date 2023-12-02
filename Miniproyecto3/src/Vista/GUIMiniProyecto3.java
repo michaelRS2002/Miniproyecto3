@@ -461,6 +461,9 @@ public class GUIMiniProyecto3 extends JFrame {
     public void setLabelR4(String Opc){
         lR4.setText(Opc);
     }
+    public String getExamenMandar(){
+        return ExamenARealizar;
+    }
     
     public String getNomExam(){
         return nombreExamen;
