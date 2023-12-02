@@ -58,7 +58,7 @@ public class ClaseArchivo {
     
    
     
-    public static void PreguntasExamenes(String nomExamen)
+    public static ArrayList<Pregunta> PreguntasExamenes(String nomExamen)
     {
         
         FileReader fr = null;
@@ -130,6 +130,9 @@ public class ClaseArchivo {
                 System.out.println("Error al cerrar el FileReader");
             }
         }
+        return preguntas;
     }
-}             
+    
+}   
+
             

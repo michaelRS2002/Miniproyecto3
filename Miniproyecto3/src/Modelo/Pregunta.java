@@ -32,6 +32,28 @@ public class Pregunta {
             this.respuestaD = respuestaD;
             this.correcta = correcta;
     }
+    public int GetNumeroPregunta(){
+        return numero;
+    }
+    public String GetEnunciado(){
+        return enunciado;
+    }
+    public String GetRespuestaA(){
+        return respuestaA;
+    }
+    public String GetRespuestaB(){
+        return respuestaB;
+    }
+    public String GetRespuestaC(){
+        return respuestaC;
+    }
+    public String GetRespuestaD(){
+        return respuestaD;
+    }
+    public String GetCorrecta(){
+        return correcta;
+    }
+    
 }
     
     

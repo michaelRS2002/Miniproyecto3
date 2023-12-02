@@ -1,103 +1,73 @@
 package Vista;
 
-/*
- *
- * @author invitado
- */
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import javax.swing.border.EmptyBorder;
 import Controlador.Controlador;
 import Servidor.ServidorProfesor;
-import javax.swing.border.EmptyBorder;
 
-
+/*
+ * Esta Clase contiene toda la Interfaz gráfica-Servidor
+ * @author Michael Ramirez Suriel
+ * @author Juan Fernando Calle
+ * @author Jose Adrian Marin
+ * @author Juan David Pinto
+ */
 public class GUIMiniProyecto3 extends JFrame {
-   
-    JLabel lNom, lImagenMenu, lCrearExamen,
-    EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3, lR4, lEnunP,lNumPregunta,lEnunciado;
-    JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
-    JPanel pGeneral, pMenu, pCExamen;
+    //Barra de Opciones en la aplicación
     JMenuBar barra;
-    JMenuItem inicio, crearExamen, verExamenes, verInformes, realizarExamen;
-    JButton jbGuardarP, jbTerminarCE, jbCancelar,jbObtener;
-    JTextArea textArea;
-    JScrollPane scrollPane;
+    JMenuItem crearExamen, verExamenes, verInformes, realizarExamen;
+    //Gui Inicio
     
+    
+    //Gui Crear Examenes
+    JLabel lCrearExamen,EnunPN,uno,dos,tres,cuatro,cinco;
+    JTextField NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
+    JTextArea textAreaCrear;
+    JScrollPane scrollPaneCrear;
+    JButton jbGuardarP, jbTerminarCE;
     int num_pregunta= 0;
+    //Gui Ver Examenes
+    
+    //Gui Ver Informes
+    
+    //Gui Realizar Examen
+    JLabel lNumPregunta,lEnunp,lEnunciado,lR1, lR2, lR3, lR4;
+    
+    
+    JLabel lNom, lImagenMenu;
+    JTextField jtPresen;
+    //Gui Servidor 
+    JTextField campoIntroducir;
+    JTextArea areaPantalla = new JTextArea(25, 20);
+    JScrollPane barrasServidor = new JScrollPane (areaPantalla);
+    JPanel pGeneral, pMenu, JCrearExamenes,pCExamen,JServidor;
+    
+    
+    JButton  jbCancelar,jbObtener;
+    
     String nombreExamen, tiempoExamen,ExamenARealizar;
+    private GUIServidor server;
     private Controlador control;
-    
-    
-   
     
     public GUIMiniProyecto3()
     {
         setTitle("Examenes Conectados");
         setSize(580,500);
-        //Metodo de la GUI principal
-        crearGUIP();
+        crearGUIMenu();//Metodo de la GUI principal
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
     }
-    public void setControlador(Controlador control) {
+    public void EstablecerControlador(Controlador control) {
         this.control = control;
     }
-    
-    
-    //No modificar esta, ya funciona bien x,D
-    public void crearGUIPresen()
-    {
-        
-        lNom = new JLabel("<html><div style='text-align: center;'>"
-                          +"<html>Bienvenido a Examenes Conectados<br>"
-                          +"tu plataforma para hacer examenes <br>"
-                          +"en grupos!!</div></html>");
-        
-        lImagenMenu = new JLabel();
-        lImagenMenu.setSize(20, 30);
-        lImagenMenu.setIcon(new ImageIcon("src/Images/Image1.png"));
-        lImagenMenu.setHorizontalAlignment(JLabel.CENTER);
-        
-        //Panel con Grid con el fin de organizar el texto y la imagen de la presentacion
-        pGeneral = new JPanel(new GridLayout(2,1));
-        
-              
-        lNom.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        Font forte = new Font("Comic Sans", Font.BOLD, 25);
-        lNom.setFont(forte);
-        lNom.setForeground(Color.RED);
-                     
-        //ubicacion de los elementos de la presentacion del programa
-        pGeneral.add(lNom);
-        pGeneral.add(lImagenMenu);
-        pGeneral.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 3)));
-        
-        //Organizar ventana
-        add(pGeneral, BorderLayout.CENTER); 
-        //add(barra, BorderLayout.NORTH);
-              
-        /**Metodo que usa un ActionLstener con el fin de dar 5 segs a la GUI de presentacion
-         * se llama al metodo dipose() para cerrar la GUI, e instantaneamente iniciar la otra
-         * que coniene el programa en su totalidad
-         */ 
-        Timer CuentaAtras = new Timer(3000, (ActionEvent e) -> {
-            dispose();
-            crearGUIP();
-        });
-        
-        CuentaAtras.start();            
-    }
-    
     //Esta como tal ya es la GUI principal del programa
-    public void crearGUIP()
+    public void crearGUIMenu()
     {
-        
+        crearGUIPresen();
         //Panel Menu
         barra = new JMenuBar();
         crearExamen = new JMenuItem("Crear Examen");
@@ -127,13 +97,45 @@ public class GUIMiniProyecto3 extends JFrame {
         
      
     }
-    
-    public void crearGUI2(){
+    public void crearGUIPresen()
+    {
+        
+        lNom = new JLabel("<html><div style='text-align: center;'>"
+                          +"<html>Bienvenido a Examenes Conectados<br>"
+                          +"tu plataforma para hacer examenes <br>"
+                          +"en grupos!!</div></html>");
+        
+        lImagenMenu = new JLabel();
+        lImagenMenu.setSize(20, 30);
+        lImagenMenu.setIcon(new ImageIcon("src/Images/imagenMenu.png"));
+        lImagenMenu.setHorizontalAlignment(JLabel.CENTER);
+        
+        //Panel con Grid con el fin de organizar el texto y la imagen de la presentacion
+        pGeneral = new JPanel(new GridLayout(2,1));
+        
+              
+        lNom.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        Font forte = new Font("Comic Sans", Font.BOLD, 25);
+        lNom.setFont(forte);
+        lNom.setForeground(Color.RED);
+                     
+        //ubicacion de los elementos de la presentacion del programa
+        pGeneral.add(lNom);
+        pGeneral.add(lImagenMenu);
+        pGeneral.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 3)));
+        
+        //Organizar ventana
+        add(pGeneral, BorderLayout.CENTER);            
+    }
+    public void crearGUIcrearExamenes(){
         
         panelNomExamen();
         num_pregunta++;
         //Paneles Para Crear Examanes
         JPanel JPregRes,JEnunciadoN,JEnunciado,JRespuestas, jpbotones;
+        //Panel Para Identificar Funcion en toda la gui
+        JCrearExamenes = new JPanel(new BorderLayout());
         //Panel Enunciado-Pregunta
         JPregRes = new JPanel(new BorderLayout());
             //Panel Enunciado Norte
@@ -151,10 +153,10 @@ public class GUIMiniProyecto3 extends JFrame {
         NPregunta= new JTextField();
         NPregunta.setText(Integer.toString(num_pregunta));
         
-        textArea = new JTextArea(2, 10); // 5 filas, 20 columnas
+        textAreaCrear = new JTextArea(2, 10); 
 
         // Agregar el JTextArea a un JScrollPane para permitir el desplazamiento
-        scrollPane = new JScrollPane(textArea);
+        scrollPaneCrear = new JScrollPane(textAreaCrear);
         
         //lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
         /**
@@ -194,7 +196,7 @@ public class GUIMiniProyecto3 extends JFrame {
             JEnunciadoN.add(NPregunta,BorderLayout.EAST);
             //Panel Enunciado
             JEnunciado.add(JEnunciadoN,BorderLayout.NORTH);
-            JEnunciado.add(scrollPane,BorderLayout.CENTER);
+            JEnunciado.add(scrollPaneCrear,BorderLayout.CENTER);
             //Panel Respuestas
             JRespuestas.add(uno);JRespuestas.add(jR1);
             JRespuestas.add(dos); JRespuestas.add(jR2);
@@ -209,9 +211,10 @@ public class GUIMiniProyecto3 extends JFrame {
         jpbotones.add(jbTerminarCE);
          
         //pCExamen.add(lCrearExamen, BorderLayout.NORTH);
-        add(lCrearExamen, BorderLayout.NORTH);
-        add(JPregRes, BorderLayout.CENTER);
-        add(jpbotones, BorderLayout.EAST);
+        JCrearExamenes.add(lCrearExamen, BorderLayout.NORTH);
+        JCrearExamenes.add(JPregRes, BorderLayout.CENTER);
+        JCrearExamenes.add(jpbotones, BorderLayout.EAST);
+        add(JCrearExamenes);
         revalidate();
         ClaseManejadoraEventos eva = new ClaseManejadoraEventos();
         jbGuardarP.addActionListener(eva);
@@ -274,9 +277,21 @@ public class GUIMiniProyecto3 extends JFrame {
     public void crearGUI3(){
         
     }
+    public void creaGuiServer()
+    {
+     JServidor = new JPanel(new BorderLayout());
+     campoIntroducir = new JTextField();
+     campoIntroducir.setEnabled(false);
+     JServidor.add(campoIntroducir, BorderLayout.SOUTH);
+     JServidor.add(barrasServidor, BorderLayout.CENTER);
+     add(JServidor);
+     
+     ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
+     campoIntroducir.addActionListener(ev);
+    }
     
     public void borrarTextos(){
-        textArea.setText("");
+        textAreaCrear.setText("");
         jR1.setText("");
         jR2.setText("");
         jR3.setText("");
@@ -292,7 +307,8 @@ public class GUIMiniProyecto3 extends JFrame {
    
        if (mensajeEmergente.YES_OPTION == 0)
                {
-                   crearGUI5();
+                   //crearGUI5();
+                   server = new GUIServidor(); 
                }
        if (mensajeEmergente.CANCEL_OPTION == 0)
        {
@@ -322,7 +338,7 @@ public class GUIMiniProyecto3 extends JFrame {
         
         
         //Dialog de conexion de los usuarios
-        barraConexion();
+        //barraConexion();
         
          //EDITAR
         
@@ -347,7 +363,7 @@ public class GUIMiniProyecto3 extends JFrame {
         pCExamen = new JPanel(new GridLayout(1,2));
         lNumPregunta = new JLabel("");
         lEnunciado = new JLabel("Enunciado Pregunta N°: " + lNumPregunta.getText());
-        lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
+        lEnunp = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
         
         //jpEste design
         jpEstado.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE,2),"Estado"));
@@ -375,7 +391,7 @@ public class GUIMiniProyecto3 extends JFrame {
         
         
         jppregYenun.add(lEnunciado);
-        jppregYenun.add(lEnunP); 
+        jppregYenun.add(lEnunp); 
         jppregYenun.add(uno);
         jppregYenun.add(dos); 
         jppregYenun.add(tres); 
@@ -405,6 +421,11 @@ public class GUIMiniProyecto3 extends JFrame {
         control.RecuperarPreguntas(ExamenA);
         
     }
+    public void Servidor(JPanel ServidorGui){
+        JServidor = new JPanel();
+        JServidor.add(ServidorGui);
+        add(JServidor);
+    }
     public void barraConexion()
         {
             JFrame jfConexion;
@@ -426,7 +447,7 @@ public class GUIMiniProyecto3 extends JFrame {
         lNumPregunta.setText(Integer.toString(Opc));
     }
     public void setEnun(String Opc){
-        lEnunP.setText(Opc);
+        lEnunp.setText(Opc);
     }
     public void setLabelR1(String Opc){
         lR1.setText(Opc);
@@ -451,7 +472,7 @@ public class GUIMiniProyecto3 extends JFrame {
         return Integer.toString(num_pregunta);
     }
     public String getEnunciado(){
-        return textArea.getText();
+        return areaPantalla.getText();
     }
     public String getR1(){
         return jR1.getText() ;
@@ -481,14 +502,21 @@ public class GUIMiniProyecto3 extends JFrame {
                 {
                     //pCExamen.setVisible(true);
                     crearExamen.setEnabled(false);
-                    crearGUI2();
+                    pGeneral.setVisible(false);
+                    crearGUIcrearExamenes();
+                }
+                if (e.getSource() == verExamenes)
+                {
+                    JCrearExamenes.setVisible(false);
                 }
                 if (e.getSource() == realizarExamen)
                 {
                     crearExamen.setEnabled(false);
                     ExamenARealizar();
-                    nombreUsuarios();
-                    ServidorProfesor.ejecutarServidor();
+                    pGeneral.setVisible(false);
+                    creaGuiServer();
+                    //nombreUsuarios();
+                   // server.creaGui()  ;
                 }
                 if (e.getSource()== jbGuardarP)
                 {
@@ -502,8 +530,9 @@ public class GUIMiniProyecto3 extends JFrame {
     // Mostrar un mensaje de error si no se conecta el usuario debidamente 
 
 public void mostrarMensaje(String mensaje){
+    
 
-textArea.append (mensaje);
+areaPantalla.append (mensaje);
 }
 }
 

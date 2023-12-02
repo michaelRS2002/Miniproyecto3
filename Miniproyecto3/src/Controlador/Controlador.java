@@ -2,19 +2,30 @@ package Controlador;
 
 import Modelo.ClaseArchivo;
 import Modelo.Logica;
+
+//import Modelo.LogicaServidor;
+import Modelo.Pregunta;
+import Servidor.ConexionServidor;
 import Vista.GUIMiniProyecto3;
+import Vista.GUIServidor;
 import java.util.ArrayList;
+
 
 public class Controlador {
     private GUIMiniProyecto3 gui;
     private ClaseArchivo arc;
     private Logica logic;
+    private GUIServidor server;
+    private ConexionServidor Ser;
+    
 
     public Controlador() {
         this.gui = new GUIMiniProyecto3();
-        this.gui.setControlador(this);
+        this.gui.EstablecerControlador(this);
         this.arc = new ClaseArchivo();
         this.logic = new Logica();
+        this.Ser = new ConexionServidor(gui,12345);
+        
     }
     
 
@@ -43,4 +54,19 @@ public class Controlador {
         System.out.println(archivosArray[0]);
         return archivosArray;
     }
+    public void RecuperarPreguntas(String Examen){
+        ArrayList<Pregunta> RPreguntas = arc.PreguntasExamenes(Examen);
+        // Obtener y mostrar información de cada pregunta
+        for (int i = 0; i < RPreguntas.size(); i++) {
+            Pregunta pregunta = RPreguntas.get(i);
+            gui.setNumPregunta(pregunta.GetNumeroPregunta()); 
+            gui.setEnun(pregunta.GetEnunciado());
+            gui.setLabelR1(pregunta.GetRespuestaA());
+            System.out.println(pregunta.GetRespuestaA());
+            gui.setLabelR2(pregunta.GetRespuestaB());
+            gui.setLabelR3(pregunta.GetRespuestaC());
+            gui.setLabelR4(pregunta.GetRespuestaD());
+        }
+    }
 }
+    
