@@ -1,6 +1,8 @@
-package cliente;
+package Vista;
 
 
+import Controlador.Controlador;
+import Modelo.Cliente;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,7 +39,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class GUICliente extends JFrame{
    
-    Cliente usuarioApp;
+   
     JLabel lNom, lImagenMenu, EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3,
             lR4, lEnunP;
     JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
@@ -45,25 +47,33 @@ public class GUICliente extends JFrame{
     JMenuBar barra;
     JMenuItem inicio, crearExamen, verInformes, realizarExamen;
     JButton jbGuardarP, jbTerminarCE, jbCancelar,jbObtener;
+    JPanel JClienteS;
+    JTextArea areaPantalla = new JTextArea(25, 20);
+    JScrollPane barrasClienteS = new JScrollPane (areaPantalla);
     JTextArea textArea;
     JScrollPane scrollPane;
     int num_pregunta= 0;
+    
+    private Controlador control;
 
    
     /**
      * Constructor de la GUI
      */
-    public void GUIMiniProyecto3()
+    public GUICliente()
     {
         setTitle("Examenes Conectados");
         setSize(580,500);
         //Metodo de la GUI principal
         crearGUIP();
-        usuarioApp = new Cliente();
+        //usuarioApp = new Cliente();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
+    }
+    public void EstablecerControlador(Controlador control) {
+        this.control = control;
     }
     
     
@@ -198,6 +208,15 @@ public class GUICliente extends JFrame{
         jR4.setText("");
         jRespuesta.setText("");
     }
+    public void creaGuiServer()
+    {
+     JClienteS = new JPanel(new BorderLayout());
+     areaPantalla.append("Holaaaa");
+     JClienteS.add(barrasClienteS, BorderLayout.CENTER);
+     add(JClienteS);
+     setVisible(true);
+     revalidate();
+    }
     /**
      * Método para obtener el nombre del usuario
      */
@@ -209,7 +228,10 @@ public class GUICliente extends JFrame{
    
        if (mensajeEmergente.YES_OPTION == 0)
                {
-                   crearGUI5();
+                   creaGuiServer();
+                
+                   //crearGUI5();
+                   
                }
        if (mensajeEmergente.CANCEL_OPTION == 0)
        {
@@ -332,6 +354,10 @@ public class GUICliente extends JFrame{
     
             
         }
+    public void mostrarMensajes(String mensaje){
+
+        areaPantalla.append (mensaje);
+    }
     
     //Clase manejadora de Eventos
     class ClaseManejadoraEventos implements ActionListener
@@ -345,9 +371,12 @@ public class GUICliente extends JFrame{
                 if (e.getSource() == realizarExamen)
                 {
                     //crearExamen.setEnabled(false);
+                    //usuarioApp = new Cliente();
+                    //usuarioApp.ejecutarCliente();
                     nombreUsuarios();
                     //Conecto el servidor
-                    usuarioApp.ejecutarCliente();
+                    revalidate();
+                    //.ejecutarCliente();
                     //ServidorProfesor.ejecutarServidor();
                 }
                 if (e.getSource()== jbGuardarP)
@@ -361,16 +390,9 @@ public class GUICliente extends JFrame{
     }
     // Mostrar un mensaje de error si no se conecta el usuario debidamente 
 
-public void mostrarMensaje(String mensaje){
 
-textArea.append (mensaje);
-}
 
-    public static void main(String[] args) {
-        GUICliente usuarioCliente = new GUICliente();
-        usuarioCliente.GUIMiniProyecto3();
-
-    }
+    
 }
 
 

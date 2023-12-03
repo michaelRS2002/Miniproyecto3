@@ -1,10 +1,12 @@
 
-package cliente;
+package Modelo;
 
+import Vista.GUICliente;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *  Clase hecha para poder conectar al usuario con el servidor de la app
@@ -18,19 +20,21 @@ public class Cliente {
     ObjectOutputStream salida;
     //Entrada de datos
     ObjectInputStream entrada;
-    
+    private GUICliente gui;
 /*
     Método principal para poder iniciar la conexion
     */
-public void ejecutarCliente()
-    {
+public Cliente(GUICliente gui)
+{
+        this.gui = gui;
         try
         {
             conectarAlServidor();
+            System.out.println("HOlla");
             obtenerFlujos();
-            procesarConexion();
+           // procesarConexion();
         }catch(IOException ioe){
-            //mostrarMensaje("error en la conexion con el cliente");
+            gui.mostrarMensajes("error en la conexion con el cliente");
         }finally{
             cerrarConexion();
         }
@@ -40,17 +44,16 @@ public void ejecutarCliente()
 */
 public void conectarAlServidor() throws IOException
     {
-        //mostrarMensaje("Intentando establecer conexion.....");
+        gui.mostrarMensajes("Intentando establecer conexion....\n");
+        System.out.println("PaseSinImprimirPut");
         cliente = new Socket("127.0.0.1", 12345);
-        //mostrarMensaje("Conectado a: "+cliente.getInetAddress());
+        gui.mostrarMensajes("Conectado a: "+cliente.getInetAddress());
     }
 
-
-/**
- *   public void recibirPreguntas() throws IOException, ClassNotFoundException {
+ /*public void recibirPreguntas() throws IOException, ClassNotFoundException {
         Object receivedObject = entrada.readObject();
-        if (receivedObject instanceof ArrayList<?>) {
-            ArrayList<?> receivedList = (ArrayList<?>) receivedObject;
+        if (receivedObject instanceof ArrayList<Pregunta> receivedList) {
+            ArrayList<Pregunta> arrayList = (ArrayList<Pregunta>) receivedObject;
             if (!receivedList.isEmpty() && receivedList.get(0) instanceof Pregunta) {
                 // Si el objeto recibido es un ArrayList de Pregunta
                 ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) receivedList;
@@ -78,7 +81,7 @@ public void obtenerFlujos() throws IOException
         //Mandar los flujos
         salida.flush();
         entrada = new ObjectInputStream(cliente.getInputStream());
-        //mostrarMensaje("Se obtuvieron los flujos E/S");
+        gui.mostrarMensajes("Se obtuvieron los flujos E/S");
     }
 /**
  * Método para leer los mensajes recibidos
@@ -129,7 +132,6 @@ public void procesarConexion() throws IOException
         }
         
     }
-   
 }
 
 
