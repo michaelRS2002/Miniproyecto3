@@ -44,7 +44,32 @@ public void conectarAlServidor() throws IOException
         cliente = new Socket("127.0.0.1", 12345);
         //mostrarMensaje("Conectado a: "+cliente.getInetAddress());
     }
+
+
 /**
+ *   public void recibirPreguntas() throws IOException, ClassNotFoundException {
+        Object receivedObject = entrada.readObject();
+        if (receivedObject instanceof ArrayList<?>) {
+            ArrayList<?> receivedList = (ArrayList<?>) receivedObject;
+            if (!receivedList.isEmpty() && receivedList.get(0) instanceof Pregunta) {
+                // Si el objeto recibido es un ArrayList de Pregunta
+                ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) receivedList;
+               
+                for (Pregunta pregunta : preguntas) {
+                    System.out.println(pregunta);
+                }
+              
+            } else {
+                System.out.println("El objeto recibido no es un ArrayList de Pregunta.");
+            }
+        } else {
+            System.out.println("Se esperaba recibir un ArrayList.");
+        }
+    }
+
+ * 
+ * 
+ * 
  * Método para obtener y enviar datos
  */
 public void obtenerFlujos() throws IOException
