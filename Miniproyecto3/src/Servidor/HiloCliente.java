@@ -105,7 +105,7 @@ public class HiloCliente extends Thread
         }while(!mensaje.equals("TERMINAR"));
         
     }
-    public void recibirPreguntas(ArrayList<Pregunta> preguntas) {
+  public void recibirPreguntas(ArrayList<Pregunta> preguntas) {
         // Almacena las preguntas recibidas en la lista local
         preguntasparaCliente = preguntas;
         try {
@@ -113,9 +113,8 @@ public class HiloCliente extends Thread
             salida.flush();
             gui.mostrarMensaje("SERVIDOR>>> Examen Mandado");
         } catch (IOException ioe) {
-            gui.mostrarMensaje("\n Error al escribir objeto");
+            gui.mostrarMensaje("\nError al escribir objeto");
         }
-        
     }
 
     public ArrayList<Pregunta> getPreguntasRecibidas() {
