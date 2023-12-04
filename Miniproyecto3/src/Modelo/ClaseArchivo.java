@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  */
 public class ClaseArchivo {
     private static ArrayList<Pregunta> preguntas;
+    static String Tiempo =null;
     
 
     public static void crearArchivoExamen(String nomExamen,String Tiempo) {
@@ -68,7 +69,6 @@ public class ClaseArchivo {
         
         FileReader fr = null;
         preguntas = new ArrayList<>();
-        String Tiempo =null;
         int numPregunta=1;
         String linea= null;
         String Enunciado = null;
@@ -136,6 +136,10 @@ public class ClaseArchivo {
             }
         }
         return preguntas;
+    }
+    public String getTiempo()
+    {
+        return Tiempo;
     }
     
 }   
