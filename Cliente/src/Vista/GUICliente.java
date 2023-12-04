@@ -53,6 +53,7 @@ public class GUICliente extends JFrame{
     JTextArea textArea;
     JScrollPane scrollPane;
     int num_pregunta= 0;
+    String nomUsuario ="";
     
     private Controlador control;
 
@@ -200,6 +201,9 @@ public class GUICliente extends JFrame{
     public String getCorrecta(){
         return jRespuesta.getText();
     }
+    public String getNomUsuario(){
+        return nomUsuario;
+    }
     public void borrarTextos(){
         textArea.setText("");
         jR1.setText("");
@@ -222,18 +226,25 @@ public class GUICliente extends JFrame{
      */
     public void nombreUsuarios()
     {
-        JOptionPane mensajeEmergente;
-        mensajeEmergente = new JOptionPane();
-        mensajeEmergente.showInputDialog(null, "Nombre del usuario", "Examenes conectados", JOptionPane.QUESTION_MESSAGE);
+        JTextField nombreUsuario = new JTextField();
+        
+        Object[] message = {
+            "Nombre del Usuario:", nombreUsuario
+    };
+        //int option = JOptionPane.showConfirmDialog(null, message, "Nombre del Usuario", JOptionPane.Q);
+       // JOptionPane mensajeEmergente;
+       // mensajeEmergente = new JOptionPane();
+        JOptionPane.showInputDialog(null, message, "Examenes conectados", JOptionPane.QUESTION_MESSAGE);
    
-       if (mensajeEmergente.YES_OPTION == 0)
+       if (JOptionPane.YES_OPTION == 0)
                {
+                   nomUsuario = nombreUsuario.getText();
                    creaGuiServer();
                 
                    //crearGUI5();
                    
                }
-       if (mensajeEmergente.CANCEL_OPTION == 0)
+       if (JOptionPane.CANCEL_OPTION == 0)
        {
            
        }

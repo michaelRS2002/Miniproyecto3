@@ -30,9 +30,10 @@ public Cliente(GUICliente gui)
         try
         {
             conectarAlServidor();
-            System.out.println("HOlla");
             obtenerFlujos();
-           // procesarConexion();
+            esperarCompas();
+            gui.mostrarMensajes("hola");
+            procesarConexion();
         }catch(IOException ioe){
             gui.mostrarMensajes("error en la conexion con el cliente");
         }finally{
@@ -45,9 +46,8 @@ public Cliente(GUICliente gui)
 public void conectarAlServidor() throws IOException
     {
         gui.mostrarMensajes("Intentando establecer conexion....\n");
-        System.out.println("PaseSinImprimirPut");
         cliente = new Socket("127.0.0.1", 12345);
-        gui.mostrarMensajes("Conectado a: "+cliente.getInetAddress());
+        gui.mostrarMensajes("Conectado a: "+cliente.getInetAddress()+"\n");
     }
 
  /*public void recibirPreguntas() throws IOException, ClassNotFoundException {
@@ -81,7 +81,24 @@ public void obtenerFlujos() throws IOException
         //Mandar los flujos
         salida.flush();
         entrada = new ObjectInputStream(cliente.getInputStream());
-        gui.mostrarMensajes("Se obtuvieron los flujos E/S");
+        gui.mostrarMensajes("Se obtuvieron los flujos E/S\n");
+        
+    }
+ public void esperarCompas() throws IOException {
+      String mensaje = "Conexión exitosa al examen\n";
+      String mensajeEstado= "";
+      String nom = gui.getNomUsuario();
+      gui.mostrarMensajes(mensaje);
+      try {
+                mensajeEstado = (String) entrada.readObject();
+                gui.mostrarMensajes(nom+mensajeEstado);
+            }catch (ClassNotFoundException ex) {
+                //mostrarMensaje("error tipo de dato incorrecto");
+            }
+      ;
+      
+        
+      
     }
 /**
  * Método para leer los mensajes recibidos
