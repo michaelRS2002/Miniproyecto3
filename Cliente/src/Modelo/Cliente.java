@@ -32,7 +32,6 @@ public Cliente(GUICliente gui)
             conectarAlServidor();
             obtenerFlujos();
             esperarCompas();
-            gui.mostrarMensajes("hola");
             procesarConexion();
         }catch(IOException ioe){
             gui.mostrarMensajes("error en la conexion con el cliente");

@@ -53,6 +53,7 @@ public class GUICliente extends JFrame{
     JTextArea textArea;
     JScrollPane scrollPane;
     int num_pregunta= 0;
+    int tiempoDeExamen = 0;
     String nomUsuario ="";
     
     private Controlador control;
@@ -191,7 +192,6 @@ public class GUICliente extends JFrame{
     public void creaGuiServer()
     {
      JClienteS = new JPanel(new BorderLayout());
-     areaPantalla.append("Holaaaa");
      JClienteS.add(barrasClienteS, BorderLayout.CENTER);
      add(JClienteS);
      setVisible(true);
