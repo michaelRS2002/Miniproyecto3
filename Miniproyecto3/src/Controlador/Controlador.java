@@ -8,7 +8,6 @@ import Modelo.Logica;
 import Modelo.Pregunta;
 import Servidor.ConexionServidor;
 import Vista.GUIMiniProyecto3;
-import Vista.GUIServidor;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +18,6 @@ public class Controlador {
     private GUIMiniProyecto3 gui;
     private ClaseArchivo arc;
     private Logica logic;
-    private GUIServidor server;
     private ConexionServidor Ser;
     
 /**

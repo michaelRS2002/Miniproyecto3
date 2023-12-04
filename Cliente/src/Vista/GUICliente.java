@@ -65,6 +65,7 @@ public class GUICliente extends JFrame{
     {
         setTitle("Examenes Conectados");
         setSize(580,500);
+        setResizable(false);
         //Metodo de la GUI principal
         crearGUIP();
         //usuarioApp = new Cliente();
@@ -149,31 +150,6 @@ public class GUICliente extends JFrame{
         //inicio.addActionListener(ev);
         verInformes.addActionListener(ev);
         realizarExamen.addActionListener(ev);
-
-    }
-
-    public void panelNomExamen()
-    {
-        // Crear un cuadro de diálogo para obtener el nombre del examen y el tiempo
-    JTextField nombreExamenField = new JTextField();
-    JTextField tiempoExamenField = new JTextField();
-
-    Object[] message = {
-            "Nombre del examen:", nombreExamenField,
-            "Tiempo de examen:", tiempoExamenField
-    };
-
-    int option = JOptionPane.showConfirmDialog(null, message, "Nombre-Tiempo del examen", JOptionPane.OK_CANCEL_OPTION);
-
-    if (option == JOptionPane.OK_OPTION) 
-    {
-        //nombreExamen = nombreExamenField.getText();
-        //tiempoExamen = tiempoExamenField.getText();
-  
-
-        // Aquí puedes utilizar los valores obtenidos (nombreExamen y tiempoExamen)
-        // para lo que necesites en tu aplicación.
-    }
 
     }
 /**
@@ -381,14 +357,13 @@ public class GUICliente extends JFrame{
               
                 if (e.getSource() == realizarExamen)
                 {
-                    //crearExamen.setEnabled(false);
-                    //usuarioApp = new Cliente();
-                    //usuarioApp.ejecutarCliente();
+  
+                    realizarExamen.setEnabled(false);
+                    verInformes.setEnabled(false);
                     nombreUsuarios();
                     //Conecto el servidor
                     revalidate();
-                    //.ejecutarCliente();
-                    //ServidorProfesor.ejecutarServidor();
+
                 }
                 if (e.getSource()== jbGuardarP)
                 {

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import Controlador.Controlador;
-import Servidor.ServidorProfesor;
 
 /*
  * Esta Clase contiene toda la Interfaz gráfica-Servidor
@@ -57,7 +56,6 @@ public class GUIMiniProyecto3 extends JFrame {
     JButton  jbCancelar,jbObtener;
     
     String nombreExamen, tiempoExamen,ExamenARealizar;
-    private GUIServidor server;
     private Controlador control;
     
     /**
@@ -391,7 +389,7 @@ public class GUIMiniProyecto3 extends JFrame {
        if (mensajeEmergente.YES_OPTION == 0)
                {
                    //crearGUI5();
-                   server = new GUIServidor(); 
+     
                }
        if (mensajeEmergente.CANCEL_OPTION == 0)
        {
