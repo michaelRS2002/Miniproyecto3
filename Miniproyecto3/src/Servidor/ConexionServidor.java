@@ -12,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Clase utilizada para crear el servidor y permitir a los usuarios conectarse
- * @author usuario
+ * @author Michael
  */
 public class ConexionServidor extends Thread {
     private ServerSocket servidor;
@@ -54,7 +54,7 @@ public class ConexionServidor extends Thread {
                     gui.mostrarMensaje("Faltan "+restantes+" estudiantes por acceder.\n");
                 }else{
                     gui.mostrarMensaje("Empezando Examen.\n");
-                    mostrarPreguntas();
+                    //mostrarPreguntas();
                 }
             }
         } catch (IOException ex) {
@@ -70,7 +70,7 @@ public class ConexionServidor extends Thread {
         try {
             contador++;
             gui.mostrarMensaje("Cliente No " + contador + " conectado!");
-            HiloCliente cliente = new HiloCliente(gui, socket,clientesListos);
+            HiloCliente cliente = new HiloCliente(gui, socket,clientesListos, contador);
             clientes[contador - 1] = cliente;
             cliente.start();
         } catch (Exception e) {

@@ -30,19 +30,22 @@ public class HiloCliente extends Thread
     private CountDownLatch clientesListos;
     
     private ArrayList<Pregunta> preguntasparaCliente;
+    private int contador;
     
     
-    public HiloCliente(GUIMiniProyecto3 gui, Socket s,CountDownLatch clientesListos)
+    public HiloCliente(GUIMiniProyecto3 gui, Socket s,CountDownLatch clientesListos, int contador)
     {
         this.gui = gui;
         this.socket = s;
         this.clientesListos = clientesListos;
+        this.contador= contador;
     }
     @Override
     public void run()
     {
         try {
             obtenerFlujos();
+            esperarcompas(contador);
             clientesListos.await();
             procesarConexion();
         } catch (IOException ex) {
@@ -120,7 +123,30 @@ public class HiloCliente extends Thread
     public ArrayList<Pregunta> getPreguntasRecibidas() {
         return preguntasparaCliente;
     }
+    public void esperarcompas(int resta) throws IOException{
+        String mensajeEspera = "Espere por favor faltan:"+Integer.toString(3-resta)+"compañeros por ingresar\n";
+        String mensajeEspera1 = "Espere por favor falta: "+Integer.toString(3-resta)+"compañero por ingresar\n";
+        String listo = "Grupo Completo\nMuchos Exitos.\n";
+        switch (3-resta) {
+            case 0:
+                salida.writeObject(listo);
+                salida.flush();
+            case 1:
+                salida.writeObject(mensajeEspera1);
+                salida.flush();
+            default:
+                salida.writeObject(mensajeEspera);
+                salida.flush();
+        }
+        
+    }
     
+
+//fin procesar
+    
+    /**
+     * cerrar los flujos y el socket que representa al cliente
+     */    
 
 //fin procesar
     
