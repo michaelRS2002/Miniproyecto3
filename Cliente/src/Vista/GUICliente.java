@@ -341,6 +341,14 @@ public class GUICliente extends JFrame{
     
             
         }
+    /**
+     * Metodos set
+     * @param nuevoTiempo 
+     */
+    public void setTiempoDeExamen(int nuevoTiempo)
+        {
+            tiempoDeExamen = nuevoTiempo;
+        }
     public void mostrarMensajes(String mensaje){
 
         areaPantalla.append (mensaje);
@@ -360,8 +368,9 @@ public class GUICliente extends JFrame{
   
                     realizarExamen.setEnabled(false);
                     verInformes.setEnabled(false);
+                    
                     nombreUsuarios();
-                    //Conecto el servidor
+                    
                     revalidate();
 
                 }
