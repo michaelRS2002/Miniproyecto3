@@ -26,7 +26,7 @@ public class GUIMiniProyecto3 extends JFrame {
     //Gui Crear Examenes
     JLabel lCrearExamen,EnunPN,uno,dos,tres,cuatro,cinco;
     JTextField NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
-    JTextArea textAreaCrear;
+    JTextArea areaEnunciado;
     JScrollPane scrollPaneCrear, jspInf;
     JButton jbGuardarP, jbTerminarCE;
     int num_pregunta= 0;
@@ -173,10 +173,10 @@ public class GUIMiniProyecto3 extends JFrame {
         NPregunta= new JTextField();
         NPregunta.setText(Integer.toString(num_pregunta));
         
-        textAreaCrear = new JTextArea(2, 10); 
+        areaEnunciado = new JTextArea(2, 10); 
 
         // Agregar el JTextArea a un JScrollPane para permitir el desplazamiento
-        scrollPaneCrear = new JScrollPane(textAreaCrear);
+        scrollPaneCrear = new JScrollPane(areaEnunciado);
         
         //lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
         /**
@@ -363,13 +363,14 @@ public class GUIMiniProyecto3 extends JFrame {
      JServidor.add(campoIntroducir, BorderLayout.SOUTH);
      JServidor.add(barrasServidor, BorderLayout.CENTER);
      add(JServidor);
+     revalidate();
      
      ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
      campoIntroducir.addActionListener(ev);
     }
     
     public void borrarTextos(){
-        textAreaCrear.setText("");
+        areaEnunciado.setText("");
         jR1.setText("");
         jR2.setText("");
         jR3.setText("");
@@ -571,7 +572,7 @@ public class GUIMiniProyecto3 extends JFrame {
         return Integer.toString(num_pregunta);
     }
     public String getEnunciado(){
-        return areaPantalla.getText();
+        return areaEnunciado.getText();
     }
     public String getR1(){
         return jR1.getText() ;
@@ -621,6 +622,9 @@ public class GUIMiniProyecto3 extends JFrame {
                 if (e.getSource() == realizarExamen)
                 {
                     crearExamen.setEnabled(false);
+                    if (JCrearExamenes != null) {
+                        JCrearExamenes.setVisible(false);
+                    }
                     ExamenARealizar();
                     pGeneral.setVisible(false);
                     creaGuiServer();
