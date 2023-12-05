@@ -28,8 +28,11 @@ public class Controlador {
         this.gui.EstablecerControlador(this);
         this.arc = new ClaseArchivo();
         this.logic = new Logica();
-        this.Ser = new ConexionServidor(gui,12345);
         
+    }
+    public void EjecutarServidor(){
+        this.Ser = new ConexionServidor(gui,12345);
+        gui.revalidate();
     }
     
     
