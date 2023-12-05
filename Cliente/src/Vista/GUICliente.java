@@ -202,32 +202,29 @@ public class GUICliente extends JFrame{
     /**
      * Método para obtener el nombre del usuario
      */
-    public void nombreUsuarios()
-    {
-        JTextField nombreUsuario = new JTextField();
-        
-        Object[] message = {
-            "Nombre del Usuario:", nombreUsuario
+    public void nombreUsuarios() {
+    JTextField nombreUsuario = new JTextField();
+
+    Object[] message = {
+        "Nombre del Usuario:", nombreUsuario
     };
-        //int option = JOptionPane.showConfirmDialog(null, message, "Nombre del Usuario", JOptionPane.Q);
-       // JOptionPane mensajeEmergente;
-       // mensajeEmergente = new JOptionPane();
-        JOptionPane.showInputDialog(null, message, "Examenes conectados", JOptionPane.QUESTION_MESSAGE);
-   
-       if (JOptionPane.YES_OPTION == 0)
-               {
-                   nomUsuario = nombreUsuario.getText();
-                   creaGuiServer();
-                
-                   //crearGUI5();
-                   
-               }
-       if (JOptionPane.CANCEL_OPTION == 0)
-       {
-           
-       }
-    
+
+    int option = JOptionPane.showConfirmDialog(null, message, "Examenes conectados", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+    if (option == JOptionPane.OK_OPTION) {
+        if(nombreUsuario.getText().isEmpty()){
+           nombreUsuarios();
+        }else{
+            nomUsuario = nombreUsuario.getText();
+            mostrarMensajes("¡Bienvenido, " + nomUsuario + "!");
+        }
+       
+    } else {
+        
     }
+    }
+
+
     /**
      * Interfaz de realizar examen
      */
@@ -416,13 +413,15 @@ public class GUICliente extends JFrame{
               
                 if (e.getSource() == realizarExamen)
                 {
-  
+                    nombreUsuarios();
+                    control.iniciarCLiente();
                     realizarExamen.setEnabled(false);
                     verInformes.setEnabled(false);
+                    creaGuiServer();
                     
-                    nombreUsuarios();
-                    
+                   
                     revalidate();
+                    
 
                 }
                 if (e.getSource()== jbObtener){

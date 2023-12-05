@@ -20,11 +20,13 @@ public class Controlador {
     public Controlador() {
         this.gui = new GUICliente();
         this.gui.EstablecerControlador(this);
-        this.cli = new Cliente(gui);
+        
         this.time = new Timer();
     }
-    public void iniciarContador() 
+    public void iniciarCLiente() 
     {
+        this.cli = new Cliente(gui);
+        //gui.revalidate();
         //time.iniciarTimer();
     }
     

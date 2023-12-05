@@ -118,37 +118,31 @@ public void obtenerFlujos() throws IOException
     * @throws IOException 
     */
     public void procesarConexion() throws IOException
-    {
-        String mensaje ="";
-        do {
-        try {
-            Object objetoRecibido = entrada.readObject();
-
-            if (objetoRecibido instanceof ArrayList<?>) {
-                // Verificar si es un ArrayList
-                ArrayList<?> listaRecibida = (ArrayList<?>) objetoRecibido;
-
-                // Verificar el tipo de elementos en el ArrayList
-                if (listaRecibida.get(0) instanceof Pregunta && !listaRecibida.isEmpty()) {
-                    // Si el objeto recibido es un ArrayList de String
-                     lista = (ArrayList<Pregunta>) listaRecibida;
-
-                    // Procesar la lista de preguntas como desees
-                    for (Pregunta p : lista) {
-                    // Hacer algo con cada pregunta
-                    System.out.println(p);
-                    }
-                } else {
-                    System.out.println("El objeto recibido no es un ArrayList de String.");
-                }
-            } else {
-                System.out.println("Se esperaba recibir un ArrayList.");
+    {String mensaje = "";
+        //double resultado;
+        //enviarDatosString(mensaje);
+       
+        
+        do
+        {
+            try {
+                mensaje = (String) entrada.readObject();
+                gui.mostrarMensajes("\nDESDE EL Servidor: "+mensaje);
+                System.out.println(mensaje);
+                
+              /*  if(operar.procesarEntrada(mensaje) == true)
+                {
+                    resultado = operar.operar();
+                    gui.mostrarMensaje(""+resultado);
+                    enviarDatos(""+resultado);
+                }*/
+                
+            } catch (ClassNotFoundException ex) {
+                gui.mostrarMensajes("se recibió un tipo de dato incorrecto desde el cliente");
             }
-        } catch (ClassNotFoundException ex) {
-            gui.mostrarMensajes("Error: tipo de dato incorrecto");
-        }
-    } while (!mensaje.equals("TERMINAR"));
-}
+        }while(!mensaje.equals("TERMINAR"));
+        
+    }
     public ArrayList <Pregunta> getLista (){
     
         return lista;
