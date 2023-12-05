@@ -26,7 +26,7 @@ public class Cliente {
     private String R2;
     private String R3;
     private String R4;
-    private ArrayList <Pregunta> lista;
+    private ArrayList <Pregunta> lista ;
 /*
     Método principal para poder iniciar la conexion
     */
@@ -131,13 +131,13 @@ public void obtenerFlujos() throws IOException
                 // Verificar el tipo de elementos en el ArrayList
                 if (listaRecibida.get(0) instanceof Pregunta && !listaRecibida.isEmpty()) {
                     // Si el objeto recibido es un ArrayList de String
-                    lista = (ArrayList<Pregunta>) listaRecibida;
+                     lista = (ArrayList<Pregunta>) listaRecibida;
 
-                    // Procesar la lista de cadenas como desees
-                    
-                    
-                    
-                    
+                    // Procesar la lista de preguntas como desees
+                    for (Pregunta p : lista) {
+                    // Hacer algo con cada pregunta
+                    System.out.println(p);
+                    }
                 } else {
                     System.out.println("El objeto recibido no es un ArrayList de String.");
                 }
@@ -149,17 +149,10 @@ public void obtenerFlujos() throws IOException
         }
     } while (!mensaje.equals("TERMINAR"));
 }
-       
-    
     public ArrayList <Pregunta> getLista (){
     
         return lista;
     }
-    
-    
-    
-    
-    
     /**
      * Su funciån es que al terminar la conexion cerras los flujos 
      */

@@ -428,6 +428,7 @@ public class GUICliente extends JFrame{
                 if (e.getSource()== jbObtener){
                 
                       indiceSeleccionado = ElegirPregunta.getSelectedIndex();
+                      control.exponerPreguntas();
                      
                 }
                     
