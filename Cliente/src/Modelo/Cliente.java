@@ -88,22 +88,30 @@ public void obtenerFlujos() throws IOException
       String mensajeEstado= "";
       String nom = gui.getNomUsuario();
       gui.mostrarMensajes(mensaje);
+      do{
       try {
-                mensajeEstado = (String) entrada.readObject();
-                gui.mostrarMensajes(nom+mensajeEstado);
+            mensaje = (String) entrada.readObject();
+                if(mensaje.equals("SERVIDOR>>> EMPIECE")){
+                    gui.crearGUI5();
+                    if(gui.getJClienteS() != null){
+                        gui.BoolGuiServer(true);
+                    }
+                    gui.revalidate();
+                    //gui.BoolGuiServer(false);
+                }
+                //mensajeEstado = (String) entrada.readObject();
+                //gui.mostrarMensajes(nom+mensajeEstado);
             }catch (ClassNotFoundException ex) {
                 //mostrarMensaje("error tipo de dato incorrecto");
             }
-      ;
-      
-        
-      
-    }
-/**
- * Método para leer los mensajes recibidos
- * @throws IOException 
- */
-public void procesarConexion() throws IOException
+      }while (!mensaje.equals("SERVIDOR>>> EMPIECE")) ;
+         
+     }
+    /**
+    * Método para leer los mensajes recibidos
+    * @throws IOException 
+    */
+    public void procesarConexion() throws IOException
     {
         String mensaje = "";
         //campoIntroducir.setEnabled(true);
@@ -111,6 +119,9 @@ public void procesarConexion() throws IOException
         {
             try {
                 mensaje = (String) entrada.readObject();
+                //if(mensaje.equals("EMPIECE")){
+                  //  gui.crearGUI5();
+                //}
                 //mostrarMensaje("\n"+mensaje);
             } catch (ClassNotFoundException ex) {
                 //mostrarMensaje("error tipo de dato incorrecto");

@@ -246,7 +246,7 @@ public class GUICliente extends JFrame{
         jpListPregn = new JPanel();
         
         //Dialog de conexion de los usuarios
-        barraConexion();
+      //  barraConexion();
         
         lR1 = new JLabel("R1"); //EDITAR 
         lR2 = new JLabel("R2"); //EDITAR
@@ -352,6 +352,12 @@ public class GUICliente extends JFrame{
     public void mostrarMensajes(String mensaje){
 
         areaPantalla.append (mensaje);
+    }
+    public void BoolGuiServer(boolean a ){
+        JClienteS.setVisible(a);
+    }
+    public JPanel getJClienteS(){
+        return JClienteS;
     }
     
     //Clase manejadora de Eventos
