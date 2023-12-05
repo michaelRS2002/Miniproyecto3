@@ -29,7 +29,7 @@ public class ConexionServidor extends Thread {
 
         try {
             this.gui.mostrarMensaje("Conectando por el puerto " + port + ".\nEspere por favor...............\n");
-            servidor = new ServerSocket(port);
+            servidor = new ServerSocket(port,3);
             this.gui.mostrarMensaje("Servidor Examenes conectados iniciado " + servidor +"\n");
             start();
         } catch (IOException ioe) {
@@ -42,7 +42,8 @@ public class ConexionServidor extends Thread {
      * Método principal para el funcionamiento del servidor
      */
     public void run() {
-        try {
+        try 
+        {
             while (contador < 3) {
                 gui.mostrarMensaje("Esperando un cliente........\n");
                 Socket clienteSocket = servidor.accept();
@@ -54,10 +55,10 @@ public class ConexionServidor extends Thread {
                     gui.mostrarMensaje("Faltan "+restantes+" estudiantes por acceder.\n");
                 }else{
                     gui.mostrarMensaje("Empezando Examen.\n");
-                    //mostrarPreguntas();
                 }
             }
-        } catch (IOException ex) {
+            notificarInicioExamen();
+        }catch (IOException ex) {
             System.out.println("Error al aceptar clientes");
         }
     }
@@ -77,6 +78,18 @@ public class ConexionServidor extends Thread {
             e.printStackTrace();
         }
     }
+    public void notificarInicioExamen() {
+        enviarMensajeAClientes("EMPIECE");
+    }
+
+    public void enviarMensajeAClientes(String mensaje) {
+        for (int i = 0; i < 3; i++) {
+            if (clientes[i] != null) {
+                clientes[i].enviarDatosString(mensaje);
+            }
+        }
+    }
+
     /**
      * Método para mostrar las preguntas del examen
      */

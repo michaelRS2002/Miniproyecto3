@@ -78,7 +78,7 @@ public class HiloCliente extends Thread
     
     public void procesarConexion() throws IOException
     {
-        String mensaje = "Conexión exitosa";
+        String mensaje = "EMPIECE";
         //double resultado;
         enviarDatosString(mensaje);
        
@@ -131,6 +131,7 @@ public class HiloCliente extends Thread
             case 0:
                 salida.writeObject(listo);
                 salida.flush();
+               
             case 1:
                 salida.writeObject(mensajeEspera1);
                 salida.flush();
