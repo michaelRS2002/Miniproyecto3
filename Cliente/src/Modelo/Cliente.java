@@ -113,22 +113,37 @@ public void obtenerFlujos() throws IOException
     */
     public void procesarConexion() throws IOException
     {
-        String mensaje = "";
-        //campoIntroducir.setEnabled(true);
-        do
-        {
-            try {
-                mensaje = (String) entrada.readObject();
-                //if(mensaje.equals("EMPIECE")){
-                  //  gui.crearGUI5();
-                //}
-                //mostrarMensaje("\n"+mensaje);
-            } catch (ClassNotFoundException ex) {
-                //mostrarMensaje("error tipo de dato incorrecto");
+        String mensaje ="";
+        do {
+        try {
+            Object objetoRecibido = entrada.readObject();
+
+            if (objetoRecibido instanceof ArrayList<?>) {
+                // Verificar si es un ArrayList
+                ArrayList<?> listaRecibida = (ArrayList<?>) objetoRecibido;
+
+                // Verificar el tipo de elementos en el ArrayList
+                if (listaRecibida.get(0) instanceof Pregunta && !listaRecibida.isEmpty()) {
+                    // Si el objeto recibido es un ArrayList de String
+                    ArrayList<Pregunta> listaPreguntas = (ArrayList<Pregunta>) listaRecibida;
+
+                    // Procesar la lista de cadenas como desees
+                    for (Pregunta pregunta : listaPreguntas) {
+                            System.out.println("Número de pregunta: " + pregunta.GetNumeroPregunta());
+                            System.out.println("Enunciado: " + pregunta.GetEnunciado());    
+                        }
+                } else {
+                    System.out.println("El objeto recibido no es un ArrayList de String.");
+                }
+            } else {
+                System.out.println("Se esperaba recibir un ArrayList.");
             }
-            
-        }while(!mensaje.equals("SERVIDOR>>> TERMINAR"));
-    }
+        } catch (ClassNotFoundException ex) {
+            gui.mostrarMensajes("Error: tipo de dato incorrecto");
+        }
+    } while (!mensaje.equals("TERMINAR"));
+}
+       
     /**
      * Su funciån es que al terminar la conexion cerras los flujos 
      */
