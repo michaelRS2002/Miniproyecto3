@@ -2,6 +2,7 @@ package Servidor;
 
 import Modelo.ClaseArchivo;
 import Modelo.Pregunta;
+import Servidor.HiloCliente;
 import Vista.GUIMiniProyecto3;
 import java.io.IOException;
 import java.net.ServerSocket;

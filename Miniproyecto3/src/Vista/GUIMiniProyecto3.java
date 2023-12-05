@@ -626,6 +626,7 @@ public class GUIMiniProyecto3 extends JFrame {
                         JCrearExamenes.setVisible(false);
                     }
                     ExamenARealizar();
+                    control.EjecutarServidor();
                     pGeneral.setVisible(false);
                     creaGuiServer();
                     //nombreUsuarios();
