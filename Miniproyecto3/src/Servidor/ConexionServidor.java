@@ -2,7 +2,6 @@ package Servidor;
 
 import Modelo.ClaseArchivo;
 import Modelo.Pregunta;
-import Servidor.HiloCliente;
 import Vista.GUIMiniProyecto3;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -24,7 +23,7 @@ public class ConexionServidor extends Thread {
 
     public ConexionServidor(GUIMiniProyecto3 gui, int port) {
         this.gui = gui;
-        this.clientes = new HiloCliente[3];
+        this.clientes = new Servidor.HiloCliente[3];
         clientesListos= new CountDownLatch(3);
 
         try {
@@ -55,14 +54,31 @@ public class ConexionServidor extends Thread {
                     gui.mostrarMensaje("Faltan "+restantes+" estudiantes por acceder.\n");
                 }else{
                     gui.mostrarMensaje("Empezando Examen.\n");
+                    esperarClientes(); // Espera a que todos los clientes estén listos
+                    enviarMensajeAClientes("EMPIECE");
+                    //mostrarPreguntas();
                 }
             }
-            notificarInicioExamen();
-            mostrarPreguntas();
         }catch (IOException ex) {
             System.out.println("Error al aceptar clientes");
+        } 
+    }
+    public void esperarClientes() {
+        try {
+            // Esperar a que todos los clientes se hayan conectado
+            clientesListos.await();
+        } catch (InterruptedException ex) {
+            System.out.println("Hilo Interrumpido");
         }
     }
+    public void enviarMulticast() {
+        // Envía tu mensaje multicast aquí
+        String mensajeMulticast = "Mensaje para todos los clientes";
+        enviarMensajeAClientes(mensajeMulticast);
+    }
+
+    
+
 
     /**
      * La logica es para mostrar los clientes conectados y crear su hilo
@@ -79,9 +95,7 @@ public class ConexionServidor extends Thread {
             e.printStackTrace();
         }
     }
-    public void notificarInicioExamen() {
-        enviarMensajeAClientes("EMPIECE");
-    }
+   
 
     public void enviarMensajeAClientes(String mensaje) {
         for (int i = 0; i < 3; i++) {
