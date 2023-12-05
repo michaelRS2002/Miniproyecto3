@@ -64,19 +64,15 @@ public class Controlador {
         System.out.println(archivosArray[0]);
         return archivosArray;
     }
-    public void RecuperarPreguntas(String Examen){
-        ArrayList<Pregunta> RPreguntas = arc.PreguntasExamenes(Examen);
-        // Obtener y mostrar información de cada pregunta
-        for (int i = 0; i < RPreguntas.size(); i++) {
-            Pregunta pregunta = RPreguntas.get(i);
-            gui.setNumPregunta(pregunta.GetNumeroPregunta()); 
-            gui.setEnun(pregunta.GetEnunciado());
-            gui.setLabelR1(pregunta.GetRespuestaA());
-            System.out.println(pregunta.GetRespuestaA());
-            gui.setLabelR2(pregunta.GetRespuestaB());
-            gui.setLabelR3(pregunta.GetRespuestaC());
-            gui.setLabelR4(pregunta.GetRespuestaD());
-        }
+
+    public void RecuperarPreguntas(String ExamenA) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+   
+    
+    
+    
+    
+    
 }
     
