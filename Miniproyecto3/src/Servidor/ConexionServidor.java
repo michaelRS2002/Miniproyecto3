@@ -58,6 +58,7 @@ public class ConexionServidor extends Thread {
                 }
             }
             notificarInicioExamen();
+            mostrarPreguntas();
         }catch (IOException ex) {
             System.out.println("Error al aceptar clientes");
         }

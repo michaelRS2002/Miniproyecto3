@@ -110,9 +110,8 @@ public class HiloCliente extends Thread
     }
   public void recibirPreguntas(ArrayList<Pregunta> preguntas) {
         // Almacena las preguntas recibidas en la lista local
-        preguntasparaCliente = preguntas;
         try {
-            salida.writeObject(preguntasparaCliente);
+            salida.writeObject(preguntas);
             salida.flush();
             gui.mostrarMensaje("SERVIDOR>>> Examen Mandado");
         } catch (IOException ioe) {
