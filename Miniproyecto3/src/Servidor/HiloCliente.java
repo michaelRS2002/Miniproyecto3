@@ -46,12 +46,10 @@ public class HiloCliente extends Thread
         try {
             obtenerFlujos();
             esperarcompas(contador);
-            clientesListos.await();
             procesarConexion();
         } catch (IOException ex) {
             System.out.println("error al procesar la comunicacion con el cliente");
-        } catch (InterruptedException ex) {
-            System.out.println("Hilo Interrumpido");
+        
         }finally {
             cerrarConexion();
         }
@@ -68,7 +66,7 @@ public class HiloCliente extends Thread
     public void enviarDatosString(String mensja)
     {
         try {
-            salida.writeObject("SERVIDOR>>> "+mensja);
+            salida.writeObject(mensja);
             salida.flush();
             gui.mostrarMensaje("SERVIDOR>>> "+mensja);
         } catch (IOException ioe) {
@@ -78,9 +76,9 @@ public class HiloCliente extends Thread
     
     public void procesarConexion() throws IOException
     {
-        String mensaje = "EMPIECE";
+        String mensaje = "";
         //double resultado;
-        enviarDatosString(mensaje);
+        //enviarDatosString(mensaje);
        
         
         do
@@ -128,28 +126,15 @@ public class HiloCliente extends Thread
         String listo = "Grupo Completo\nMuchos Exitos.\n";
         switch (3-resta) {
             case 0:
-                salida.writeObject(listo);
-                salida.flush();
-               
+                enviarDatosString(listo);
             case 1:
-                salida.writeObject(mensajeEspera1);
-                salida.flush();
+                enviarDatosString(mensajeEspera1);
             default:
-                salida.writeObject(mensajeEspera);
-                salida.flush();
+                enviarDatosString(mensajeEspera);
         }
         
     }
-    
 
-//fin procesar
-    
-    /**
-     * cerrar los flujos y el socket que representa al cliente
-     */    
-
-//fin procesar
-    
     /**
      * cerrar los flujos y el socket que representa al cliente
      */
