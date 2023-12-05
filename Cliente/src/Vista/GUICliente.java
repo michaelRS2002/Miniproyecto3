@@ -55,6 +55,8 @@ public class GUICliente extends JFrame{
     int num_pregunta= 0;
     int tiempoDeExamen = 0;
     String nomUsuario ="";
+    JComboBox<String> ElegirPregunta;
+    int indiceSeleccionado = 0;
     
     private Controlador control;
 
@@ -280,10 +282,13 @@ public class GUICliente extends JFrame{
         
         //Lista desplegable EDITAR
         String[] NumPreguntas = {"1","2","3","4","5","6","7","8"};
-        JComboBox<String> ElegirPregunta = new JComboBox<>(NumPreguntas);
+        
+        ElegirPregunta = new JComboBox<>(NumPreguntas);
         
         jbObtener = new JButton("Obtener"); //Añadir el Listener
+        ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
         
+        jbObtener.addActionListener(ev);
         /**
          * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
          * otro que contenga como tal la pregunta con el fin de quede bien organizado"
@@ -360,6 +365,46 @@ public class GUICliente extends JFrame{
         return JClienteS;
     }
     
+    public void set1(String recibe){
+    
+        
+        lR1.setText (recibe);
+    
+    }
+    
+    public void set2(String recibe){
+    
+        
+        lR2.setText (recibe);
+    
+    }
+    public void set3(String recibe){
+    
+        
+        lR3.setText (recibe);
+    
+    }
+    public void set4(String recibe){
+    
+        
+        lR4.setText (recibe);
+    
+    }
+    
+    public void  setLEnunP(String recibe) {
+     
+        lEnunP.setText(recibe);
+    }
+    
+   
+    public int indice(){
+
+        return indiceSeleccionado;
+    }
+    
+    
+    
+    
     //Clase manejadora de Eventos
     class ClaseManejadoraEventos implements ActionListener
     {
@@ -380,6 +425,13 @@ public class GUICliente extends JFrame{
                     revalidate();
 
                 }
+                if (e.getSource()== jbObtener){
+                
+                      indiceSeleccionado = ElegirPregunta.getSelectedIndex();
+                     
+                }
+                    
+                    
                 if (e.getSource()== jbGuardarP)
                 {
                     //control.GuardarPreguntas();
@@ -395,5 +447,7 @@ public class GUICliente extends JFrame{
 
     
 }
+
+
 
 
