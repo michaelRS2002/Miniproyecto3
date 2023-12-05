@@ -1,101 +1,83 @@
 PreguntasCulturaGeneral
-8
+12
 -----------------------------------------------------
 Pregunta N° 1
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿Cuándo Cristóbal Colón descubrió América?
 -------Opciones----------------
 1896
 1963
-1972
+1492
 1829
 -------Correcta----------------
-B
+1492
 /////////////////////////////////////////////
 Pregunta N° 2
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿Cuál es la capital de Francia?
 -------Opciones----------------
-61
-47
-50
-70
+Berlín
+Roma
+París
+Madrid
 -------Correcta----------------
-C
+París
 /////////////////////////////////////////////
 Pregunta N° 3
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿Cuál es el río más largo del mundo?
 -------Opciones----------------
-Si
-No
-Ninguna es correcta
-Todas son correctas
+Nilo
+Amazonas
+Yangtsé
+Misisipi
 -------Correcta----------------
-A
+Amazonas
 /////////////////////////////////////////////
 Pregunta N° 4
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿Quién escribió la obra "Romeo y Julieta"?
 -------Opciones----------------
-Gazapos
-Ansarino
-caloyo
-Lebrato
+William Shakespeare
+Jane Austen
+Miguel de Cervantes
+Charles Dickens
 -------Correcta----------------
-A
+William Shakespeare
 /////////////////////////////////////////////
 Pregunta N° 5
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿En qué año se llevó a cabo la Revolución Rusa?
 -------Opciones----------------
-La calcita
-El cuarzo
-El topacio
-Diamante
+1876
+1917
+1945
+1789
 -------Correcta----------------
-D
+1917
 /////////////////////////////////////////////
 Pregunta N° 6
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿Cuál es el componente principal del aire que respiramos?
 -------Opciones----------------
-Ninguna es correcta
-9.000 millones de años
-13.800 millones de años
-27.452 millones de años
+Nitrógeno
+Oxígeno
+Dióxido de carbono
+Argón
 -------Correcta----------------
-C
+Oxígeno
 /////////////////////////////////////////////
 Pregunta N° 7
-Conectando por el puerto 12345.
-Espere por favor...............
-Servidor Examenes conectados iniciado ServerSocket[addr=0.0.0.0/0.0.0.0,localport=12345]
-Esperando un cliente........
-
+¿En qué continente se encuentra Egipto?
 -------Opciones----------------
-Museo del Louvre, París
-British Museum
-Museo de Arte Moderno de Nueva York
- Museos Vaticanos
+Asia
+África
+Europa
+América
 -------Correcta----------------
-C
+África
+/////////////////////////////////////////////
+Pregunta N° 8
+¿Cuál es el planeta más grande del sistema solar?
+-------Opciones----------------
+Marte
+Júpiter
+Venus
+Saturno
+-------Correcta----------------
+Júpiter
 /////////////////////////////////////////////
