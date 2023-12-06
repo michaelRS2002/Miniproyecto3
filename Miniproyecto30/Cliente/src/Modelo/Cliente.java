@@ -184,7 +184,9 @@ public class Cliente {
     }
 
     public void escribirEnunciados(ArrayList<Pregunta> lis) {
-        ArrayList<Pregunta> preguntas = lis;
+        ArrayList<Pregunta> preguntas = lis;   
+        
+
         File examen = new File("src\\Controlador\\Examen.txt");
         gui.crearGUI5();
 

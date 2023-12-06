@@ -4,10 +4,15 @@ import Modelo.Cliente;
 import Modelo.Pregunta;
 import Vista.GUICliente;
 import Modelo.Timer;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -78,6 +83,51 @@ public class Controlador {
             System.out.println("no encontró el archivo a escribir");
         } 
     }
+public void enPantalla() {
+    try (BufferedReader br = new BufferedReader(new FileReader("src\\Controlador\\Examen.txt"))) {
+        String linea;
+        int contadorPregunta = 1;
+        int contadorLineas = 1;
+
+        while ((linea = br.readLine()) != null) {
+            if (linea.equals("/////////////////////////////////////////////")) {
+                System.out.println("Terminé pregunta");
+                contadorPregunta++;
+                contadorLineas = 1;
+                continue;
+            }
+
+            switch (contadorLineas) {
+                case 2:
+                    gui.setLEnunP(linea);
+                    break;
+                case 4:
+                    gui.set1(linea);
+                    break;
+                case 5:
+                    gui.set2(linea);
+                    break;
+                case 6:
+                    gui.set3(linea);
+                    break;
+                case 7:
+                    gui.set4(linea);
+                    break;
+                case 9:
+                    // Aquí deberías establecer la respuesta correcta en tu interfaz gráfica
+                    gui.Correcta(linea);
+                    break;
+            }
+
+            contadorLineas++;
+        }
+    } catch (IOException ex) {
+        // Manejar la excepción
+        ex.printStackTrace();
+    }
+    gui.revalidate();
+}
+
 }
 
 
