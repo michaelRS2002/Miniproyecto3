@@ -1,0 +1,83 @@
+PreguntasCulturaGeneral
+12
+-----------------------------------------------------
+Pregunta N° 1
+¿Cuándo Cristóbal Colón descubrió América?
+-------Opciones----------------
+1896
+1963
+1492
+1829
+-------Correcta----------------
+1492
+/////////////////////////////////////////////
+Pregunta N° 2
+¿Cuál es la capital de Francia?
+-------Opciones----------------
+Berlín
+Roma
+París
+Madrid
+-------Correcta----------------
+París
+/////////////////////////////////////////////
+Pregunta N° 3
+¿Cuál es el río más largo del mundo?
+-------Opciones----------------
+Nilo
+Amazonas
+Yangtsé
+Misisipi
+-------Correcta----------------
+Amazonas
+/////////////////////////////////////////////
+Pregunta N° 4
+¿Quién escribió la obra "Romeo y Julieta"?
+-------Opciones----------------
+William Shakespeare
+Jane Austen
+Miguel de Cervantes
+Charles Dickens
+-------Correcta----------------
+William Shakespeare
+/////////////////////////////////////////////
+Pregunta N° 5
+¿En qué año se llevó a cabo la Revolución Rusa?
+-------Opciones----------------
+1876
+1917
+1945
+1789
+-------Correcta----------------
+1917
+/////////////////////////////////////////////
+Pregunta N° 6
+¿Cuál es el componente principal del aire que respiramos?
+-------Opciones----------------
+Nitrógeno
+Oxígeno
+Dióxido de carbono
+Argón
+-------Correcta----------------
+Oxígeno
+/////////////////////////////////////////////
+Pregunta N° 7
+¿En qué continente se encuentra Egipto?
+-------Opciones----------------
+Asia
+África
+Europa
+América
+-------Correcta----------------
+África
+/////////////////////////////////////////////
+Pregunta N° 8
+¿Cuál es el planeta más grande del sistema solar?
+-------Opciones----------------
+Marte
+Júpiter
+Venus
+Saturno
+-------Correcta----------------
+Júpiter
+/////////////////////////////////////////////
