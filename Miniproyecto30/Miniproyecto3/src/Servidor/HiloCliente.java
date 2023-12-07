@@ -1,6 +1,7 @@
 package Servidor;
 
 import Modelo.Pregunta;
+import Modelo.Respuesta;
 import Vista.GUIMiniProyecto3;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -100,6 +101,16 @@ public class HiloCliente extends Thread {
             try {
                 mensaje = (String) entrada.readObject();
                 gui.mostrarMensaje("\nDESDE EL CLIENTE: " + mensaje);
+                ObjectInputStream entradaA = new ObjectInputStream(socket.getInputStream());
+                // Leer el objeto serializado
+                Object objetoRecibido = entradaA.readObject();
+
+                // Verificar el tipo del objeto
+                if (objetoRecibido instanceof ArrayList<?>) {
+                    @SuppressWarnings("unchecked")
+                    ArrayList<Respuesta> listaRespuestas = (ArrayList<Respuesta>) objetoRecibido;
+                    System.out.println("LLEGO respuesta");
+                }
             } catch (ClassNotFoundException ex) {
                 gui.mostrarMensaje("Se recibió un tipo de dato incorrecto desde el cliente");
             } catch (SocketException se) {

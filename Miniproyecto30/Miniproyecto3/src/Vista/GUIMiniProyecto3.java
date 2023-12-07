@@ -31,8 +31,12 @@ public class GUIMiniProyecto3 extends JFrame {
     JButton jbGuardarP, jbTerminarCE;
     int num_pregunta= 0;
     
-    //Gui Ver Examenes
     
+    //Gui Ver Examenes
+    JComboBox<String> jcbSelecExam;
+    JPanel jpExam, jpExamTA;
+    JTextArea jtaExam;
+    JScrollPane jspExam;
     
     //Gui Ver Informes
     JComboBox<String> jcbSelecInformes;
@@ -259,6 +263,54 @@ public class GUIMiniProyecto3 extends JFrame {
         jbGuardarP.addActionListener(eva);
         
     }
+    public void verExamenes()
+    {    
+         /**
+         * Arraylist de los elementos del comboBox
+         * Pd: Esta es la que va a recibir los
+         * examenes creados
+         */ 
+        String[] examenes = {"Exam #1","Exam #2","Exam #3","..."};
+        
+        //Elementos de la GUIinformes
+        
+        jcbSelecExam = new JComboBox<>(examenes);
+        jcbSelecExam.setPreferredSize(new Dimension(80,40));
+        
+        jtaExam = new JTextArea();
+        jtaExam.setLineWrap(true);
+        jtaExam.setWrapStyleWord(true);
+        
+        jspExam = new JScrollPane(jtaExam);
+        
+        JLabel selecE = new JLabel("<html><div style='text-align: center;'>"
+                                  +"<html>Seleccione el "
+                                  +"<br>examen a ver");
+        
+        //Creacion de los paneles
+        jpExamTA = new JPanel();
+        jpExamTA.setBorder(new EmptyBorder(10,5,5,5));
+        jpExamTA.setPreferredSize(new Dimension(100,50));
+        jpExam = new JPanel(new GridLayout(1,1));
+        jpExam.setBorder(new EmptyBorder(10,10,10,10));
+        
+        jpExamTA.add(selecE,BorderLayout.NORTH); jpExamTA.add(jcbSelecExam); 
+        jpExam.add(jspExam);
+        
+        add(jpExamTA, BorderLayout.WEST);
+        add(jpExam, BorderLayout.CENTER);
+        revalidate();
+        
+    }
+    
+    public void borrarTextos(){
+        areaEnunciado.setText("");
+        jR1.setText("");
+        jR2.setText("");
+        jR3.setText("");
+        jR4.setText("");
+        jRespuesta.setText("");
+    }
     
     public void panelNomExamen(){
         // Crear un cuadro de diálogo para obtener el nombre del examen y el tiempo
@@ -369,14 +421,7 @@ public class GUIMiniProyecto3 extends JFrame {
      campoIntroducir.addActionListener(ev);
     }
     
-    public void borrarTextos(){
-        areaEnunciado.setText("");
-        jR1.setText("");
-        jR2.setText("");
-        jR3.setText("");
-        jR4.setText("");
-        jRespuesta.setText("");
-    }
+ 
     
     /**
      * Método para obtener el nombre de usuarios
@@ -398,109 +443,8 @@ public class GUIMiniProyecto3 extends JFrame {
        }
     
     }
-    /**
-     * Panel de realizar examen
-     */
-    public void crearGUI5(){
-        
-        
-        //JLabel para las respuestas "Estos son los que hacen el return"
-        JPanel jppregYenun,jpbotones,jpEstado,jpListPregn, jpEste;
-        JDialog jdConexion;
-        JCheckBox uno,dos,tres,cuat;
-        jppregYenun = new JPanel(new GridLayout(6,1));
-        jppregYenun.setBorder(new EmptyBorder(10,10,10,10));
-        jpbotones = new JPanel(new GridLayout(1,3,5,5));
-        jpbotones.setBorder(new EmptyBorder(10,10,10,10));
-        jpEste = new JPanel(new GridLayout(2,1));
-        jpEste.setPreferredSize(new Dimension(150,100));
-        jpEstado = new JPanel();
-        jpListPregn = new JPanel();
-        lR1 = new JLabel(""); //EDITAR 
-        lR2 = new JLabel(""); //EDITAR
-        lR3 = new JLabel(""); //EDITAR
-        lR4 = new JLabel("");
-        
-        
-        //Dialog de conexion de los usuarios
-        //barraConexion();
-        
-         //EDITAR
-        
-        
-        
-        
-        jbGuardarP = new JButton("<html>Guardar"
-                               + "Pregunta<br>");
-        jbGuardarP.setPreferredSize(new Dimension(50,50));
-        
-        jbCancelar = new JButton("Cancelar");
-        jbCancelar.setPreferredSize(new Dimension(50,50));
-        
-        jbTerminarCE = new JButton("<html>Terminar"
-                                 + "Examen<br>");
-        jbTerminarCE.setPreferredSize(new Dimension(50,50));
-        
-        lCrearExamen = new JLabel("Crear examenes");
-        Font forte = new Font("Comic Sans", Font.ROMAN_BASELINE, 20);
-        lCrearExamen.setFont(forte);
-        lCrearExamen.setHorizontalAlignment(JLabel.CENTER);
-        pCExamen = new JPanel(new GridLayout(1,2));
-        lNumPregunta = new JLabel("");
-        lEnunciado = new JLabel("Enunciado Pregunta N°: " + lNumPregunta.getText());
-        lEnunp = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
-        
-        //jpEste design
-        jpEstado.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE,2),"Estado"));
-        jpListPregn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED,2),"Listado Preguntas"));
-        
-        //Lista desplegable EDITAR
-        String[] NumPreguntas = {"1","2","3","4","5","6","7","8"};
-        JComboBox<String> ElegirPregunta = new JComboBox<>(NumPreguntas);
-        
-        jbObtener = new JButton("Obtener"); //Añadir el Listener
-        TraerPreguntas(ExamenARealizar);
-        System.out.println("Ya me ejecute"+lR1.getText());
-        lEnunciado.setText("Enunciado Pregunta N°: " + lNumPregunta.getText());
-
-        /**
-         * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
-         * otro que contenga como tal la pregunta con el fin de quede bien organizado"
-         */
-        //pd 1: Se usa los .getText() para evitar meter un JLabel dentro de un JLabel "Lanza una excepcion"
-        uno = new JCheckBox("1. " + lR1.getText());
-        dos = new JCheckBox("2. " + lR2.getText());
-        tres = new JCheckBox("3. " + lR3.getText());
-        cuat = new JCheckBox("4. " + lR4.getText());
-        
-        
-        
-        jppregYenun.add(lEnunciado);
-        jppregYenun.add(lEnunp); 
-        jppregYenun.add(uno);
-        jppregYenun.add(dos); 
-        jppregYenun.add(tres); 
-        jppregYenun.add(cuat);
-        
-        jpEste.add(jpListPregn);
-        jpEste.add(jpEstado);
-               
-        jpListPregn.add(ElegirPregunta,BorderLayout.WEST);
-        jpListPregn.add(jbObtener, BorderLayout.EAST);
-        
-        jpbotones.add(jbCancelar); //Hace que la pregunta seleccionada sea desseleccionada
-        jpbotones.add(jbGuardarP); //Guarda la respuesta del estudiante
-        jpbotones.add(jbTerminarCE); //Hace que el examen termine
-         
-        //pCExamen.add(lCrearExamen, BorderLayout.NORTH);
-        add(lCrearExamen, BorderLayout.NORTH);
-        add(jppregYenun, BorderLayout.CENTER);
-        add(jpEste, BorderLayout.EAST);
-        add(jpbotones, BorderLayout.SOUTH);
-        revalidate();
-        
-        
-    }
+    
+   
     
     public void TraerPreguntas(String ExamenA){
       //  this.ExamenARealizar=ExamenARealizar;
@@ -602,26 +546,35 @@ public class GUIMiniProyecto3 extends JFrame {
 
                 if (e.getSource() == crearExamen)
                 {
-                    //pCExamen.setVisible(true);
                     crearExamen.setEnabled(false);
-                    pGeneral.setVisible(false);
+                    verExamenes.setEnabled(true);
+                    verInformes.setEnabled(true);
+                    realizarExamen.setEnabled(true);
                     crearGUIcrearExamenes();
                 }
-                if (e.getSource() == verExamenes)
+                 if (e.getSource() == verExamenes)
                 {
-                    JCrearExamenes.setVisible(false);
+                    crearExamen.setEnabled(true);
+                    verExamenes.setEnabled(false);
+                    verInformes.setEnabled(true);
+                    realizarExamen.setEnabled(true);
+                    verExamenes();
                 }
-                
                 if(e.getSource() == verInformes)
                 {
-                    crearExamen.setEnabled(false);
+                    crearExamen.setEnabled(true);
+                    verExamenes.setEnabled(true);
+                    verInformes.setEnabled(false);
+                    realizarExamen.setEnabled(true);
+
                     verInformes();
-                    pGeneral.setVisible(false);         
                 }
-                
                 if (e.getSource() == realizarExamen)
                 {
                     crearExamen.setEnabled(false);
+                    verExamenes.setEnabled(false);
+                    verInformes.setEnabled(false);
+                    realizarExamen.setEnabled(false);
                     control.EjecutarServidor();
                     if (JCrearExamenes != null) {
                         JCrearExamenes.setVisible(false);
