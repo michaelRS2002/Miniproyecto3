@@ -40,8 +40,9 @@ import javax.swing.border.EmptyBorder;
 public class GUICliente extends JFrame{
    
    
-    JLabel lNom, lImagenMenu, EnunPN,uno,dos,tres,cuatro,cinco,lR1, lR2, lR3,
+    JLabel lNom, lImagenMenu, EnunPN,cinco,lR1, lR2, lR3,
             lR4, lEnunP;
+    JCheckBox uno,dos,tres,cuatro;
     JTextField jtPresen,NPregunta,jR1, jR2, jR3, jR4,jRespuesta;
     JPanel pGeneral, pMenu, pCExamen;
     JMenuBar barra;
@@ -55,6 +56,7 @@ public class GUICliente extends JFrame{
     int num_pregunta= 0;
     int tiempoDeExamen = 0;
     String nomUsuario ="";
+    String [] NumPregunta= null;
     JComboBox<String> ElegirPregunta;
     int indiceSeleccionado = 0;
     
@@ -243,6 +245,9 @@ public class GUICliente extends JFrame{
         jpListPregn = new JPanel();
         
         //Dialog de conexion de los usuarios
+        control.enPantalla();
+        
+        numerodepreguntas();
       //  barraConexion();
         
         lR1 = new JLabel("R1"); //EDITAR 
@@ -269,39 +274,39 @@ public class GUICliente extends JFrame{
         pCExamen = new JPanel(new GridLayout(1,2));
         JTextField NPregunta = new JTextField("");
         JLabel EnunPN = new JLabel("Enunciado Pregunta N°: " + NPregunta.getText());
-        lEnunP = new JLabel("Aqui se supone que va la pregunta"); //EDITAR
+        lEnunP = new JLabel("Haga clic en obtener y escoja su pregunta"); //EDITAR
         
         //jpEste design
         jpEstado.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE,2),"Estado"));
         jpListPregn.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.RED,2),"Listado Preguntas"));
         
         //Lista desplegable EDITAR
-        String[] NumPreguntas = {"1","2","3","4","5","6","7","8"};
-        
-        ElegirPregunta = new JComboBox<>(NumPreguntas);
-        
+        if(NumPregunta == null){
+            String[] NumPreguntaa = {"1", "2", "3"};
+            ElegirPregunta = new JComboBox<>(NumPreguntaa);
+        }else{
+            ElegirPregunta = new JComboBox<>(NumPregunta);
+        }
         jbObtener = new JButton("Obtener"); //Añadir el Listener
-        ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
         
-        jbObtener.addActionListener(ev);
         /**
          * Aqui se supone es donde van los JLabel de las preguntas "uno que contenga el numero y
          * otro que contenga como tal la pregunta con el fin de quede bien organizado"
          */
         //pd 1: Se usa los .getText() para evitar meter un JLabel dentro de un JLabel "Lanza una excepcion"
-        uno = new JCheckBox("1. " + lR1.getText());
-        dos = new JCheckBox("2. " + lR2.getText());
-        tres = new JCheckBox("3. " + lR3.getText());
-        cuat = new JCheckBox("4. " + lR4.getText());
+        this.uno = new JCheckBox("1. " + lR1.getText());
+        this.dos = new JCheckBox("2. " + lR2.getText());
+        this.tres = new JCheckBox("3. " + lR3.getText());
+        this.cuatro = new JCheckBox("4. " + lR4.getText());
         
         
         
         jppregYenun.add(EnunPN);
         jppregYenun.add(lEnunP); 
-        jppregYenun.add(uno);
-        jppregYenun.add(dos); 
-        jppregYenun.add(tres); 
-        jppregYenun.add(cuat);
+        jppregYenun.add(this.uno);
+        jppregYenun.add(this.dos); 
+        jppregYenun.add(this.tres); 
+        jppregYenun.add(this.cuatro);
         
         jpEste.add(jpListPregn);
         jpEste.add(jpEstado);
@@ -318,6 +323,13 @@ public class GUICliente extends JFrame{
         add(jpEste, BorderLayout.EAST);
         add(jpbotones, BorderLayout.SOUTH);
         revalidate();
+        ClaseManejadoraEventos ev = new ClaseManejadoraEventos();
+        
+        jbObtener.addActionListener(ev);
+        this.uno.addActionListener(ev);
+        this.dos.addActionListener(ev);
+        this.tres.addActionListener(ev);
+        this.cuatro.addActionListener(ev);
         
         
     }
@@ -359,30 +371,33 @@ public class GUICliente extends JFrame{
     public JPanel getJClienteS(){
         return JClienteS;
     }
+    public void numerodepreguntas(){
+        NumPregunta= control.getListaPreg();
+    }
     
     public void set1(String recibe){
     
         
-        lR1.setText (recibe);
+        uno.setText ("1. "+recibe);
     
     }
     
     public void set2(String recibe){
     
         
-        lR2.setText (recibe);
+        dos.setText ("2. "+recibe);
     
     }
     public void set3(String recibe){
     
         
-        lR3.setText (recibe);
+        tres.setText ("3. "+ recibe);
     
     }
     public void set4(String recibe){
     
         
-        lR4.setText (recibe);
+        cuatro.setText ("4. "+recibe);
     
     }
     
@@ -425,20 +440,32 @@ public class GUICliente extends JFrame{
 
                 }
                 if (e.getSource()== jbObtener){
-                
+                      revalidate();
                       indiceSeleccionado = ElegirPregunta.getSelectedIndex();
-                      control.exponerPreguntas();
+                      control.PonerPreguntaNum(indiceSeleccionado);
+                      revalidate();
                      
-                }
-                    
-                    
+                }    
                 if (e.getSource()== jbGuardarP)
                 {
                     //control.GuardarPreguntas();
-                    num_pregunta++;
-                    NPregunta.setText(Integer.toString(num_pregunta));
-                    borrarTextos();
+                    if(uno.isSelected()){
+                        String textoModificado = uno.getText().replaceFirst("1\\.\\ s*", "");
+                        control.enviarRespuestas(indiceSeleccionado, textoModificado);
+                        System.out.println(textoModificado);
+                    }
+                    if(e.getSource()==dos){
+                        
+                    }
+                    if(e.getSource()==tres){
+                        
+                    }
+                    if(e.getSource()==cuatro){
+                        
+                    }
+                    
                 }
+                
             }
     }
     // Mostrar un mensaje de error si no se conecta el usuario debidamente 

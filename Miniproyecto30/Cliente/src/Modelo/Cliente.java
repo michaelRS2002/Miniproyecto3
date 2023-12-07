@@ -2,6 +2,7 @@ package Modelo;
 
 import Vista.GUICliente;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,6 +28,7 @@ public class Cliente {
     // Entrada de datos
     private ObjectInputStream entrada;
     private GUICliente gui;
+    private LogicaCliente LOG;
     private ArrayList<Pregunta> lista;
     private MulticastSocket multicastSocket; // Nuevo: para multicast
     private InetAddress multicastGroup;
@@ -54,13 +56,13 @@ public class Cliente {
     /*
     Su funcionalidad es conectarse al servidor
     */
-    public void conectarAlServidor() throws IOException {
+    public final void conectarAlServidor() throws IOException {
         gui.mostrarMensajes("Intentando establecer conexión...\n");
         cliente = new Socket("127.0.0.1", 12345);
         gui.mostrarMensajes("Conectado a: " + cliente.getInetAddress() + "\n");
     }
 
-    public void obtenerFlujos() throws IOException {
+    public final void obtenerFlujos() throws IOException {
         salida = new ObjectOutputStream(cliente.getOutputStream());
         salida.flush();
         entrada = new ObjectInputStream(cliente.getInputStream());
@@ -74,8 +76,7 @@ public class Cliente {
         multicastSocket = new MulticastSocket(multicastPort);
         multicastSocket.joinGroup(multicastGroup);
     }
-    public ArrayList<Pregunta> recibirDatosMulticast() {
-    int contador = 1;
+    public final ArrayList<Pregunta> recibirDatosMulticast() {
     ArrayList<Pregunta> preguntas = null;
 
     do {
@@ -141,7 +142,7 @@ public class Cliente {
      *
      * @throws IOException
      */
-    public void procesarConexion() throws IOException {
+    public final void procesarConexion() throws IOException {
         String mensaje = "";
         escribirEnunciados(recibirDatosMulticast());
         System.out.println("Epaaa");
@@ -167,6 +168,8 @@ public class Cliente {
             salida.close();
             entrada.close();
             cliente.close();
+            ////Pendiente
+           // LOG.borrarExamen();
         } catch (IOException ex) {
             gui.mostrarMensajes("Error al cerrar la conexión");
             ex.printStackTrace();
@@ -182,23 +185,32 @@ public class Cliente {
             ex.printStackTrace();
         }
     }
+    public void enviarArrayList(ArrayList<Respuesta> respuesta) throws IOException{
+        
+        ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+        ObjectOutputStream salida = new ObjectOutputStream(byteArrayOut);
+        salida.writeObject(respuesta);
+        System.out.println("Mandado");
+        salida.flush();
+        salida.close();
+        
+    }
 
-    public void escribirEnunciados(ArrayList<Pregunta> lis) {
+    public final void escribirEnunciados(ArrayList<Pregunta> lis) {
         ArrayList<Pregunta> preguntas = lis;   
         
 
         File examen = new File("src\\Controlador\\Examen.txt");
-        gui.crearGUI5();
-
         if (examen.exists()) {
             System.out.println("El archivo ya existe.");
+            gui.crearGUI5();
             return;
         }
         try (FileWriter fw = new FileWriter("src\\Controlador\\Examen.txt", true)) {
             // Escribe en el archivo
-            for (int i = 1; i < preguntas.size(); i++) {
+            for (int i = 0; i < preguntas.size(); i++) {
                 Pregunta pregunta = preguntas.get(i);
-                fw.append("Pregunta N° " + i + "\n");
+                fw.append("Pregunta N° " + i+1 + "\n");
                 fw.append(pregunta.GetEnunciado() + "\n");
                 fw.append("-------Opciones----------------\n");
                 fw.append(pregunta.GetRespuestaA() + "\n");
@@ -212,5 +224,6 @@ public class Cliente {
         } catch (IOException ex) {
             System.out.println("No encontró el archivo a escribir");
         }
+        gui.crearGUI5();
     }
 }

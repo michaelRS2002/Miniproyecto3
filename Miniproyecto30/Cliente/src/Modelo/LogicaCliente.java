@@ -5,6 +5,7 @@
 package Modelo;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +41,15 @@ public class LogicaCliente {
 
         return preguntas;
     }
+    
+    public void borrarExamen(){
+        File examen = new File("src\\Controlador\\Examen.txt");
+        examen.delete();
+    }
+    
+    
+    
+    
     
     
   
